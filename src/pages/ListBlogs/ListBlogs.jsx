@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBlogs } from "../../features/actions/blogActions";
 
-const Dashboard = () => {
+const ListBlogs = () => {
   const dispatch = useDispatch();
   const { blogs } = useSelector((state) => state.blog);
 
@@ -11,11 +11,7 @@ const Dashboard = () => {
   }, []);
 
   console.log(blogs);
-  return (
-    <main className="flex-1 p-8 mt-16 ml-64">
-      <div className="text-4xl font-bold mb-4">Dashboard</div>
-    </main>
-  );
+  return <div>ListBlogs</div>;
 };
 
-export default Dashboard;
+export default ListBlogs;
