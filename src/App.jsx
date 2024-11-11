@@ -1,33 +1,27 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import LayoutComponent from "./components/Layout/LayoutComponent"
-import HomePage from "./pages/Homepage/HomePage"
-
- 
-
-
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import LayoutComponent from "./components/Layout/LayoutComponent";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LayoutComponent />,
 
-    children:[
+    children: [
       {
         index: true,
-        element: <HomePage />
-      }
-    ]
-  }
-])
-
+        element: <Dashboard />,
+      },
+    ],
+  },
+]);
 
 function App() {
-
   return (
     <>
-       <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
