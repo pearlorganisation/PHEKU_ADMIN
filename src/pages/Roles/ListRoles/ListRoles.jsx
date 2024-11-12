@@ -43,36 +43,43 @@ const ListRoles = () => {
                 </div>
 
                 {/* Roles table */}
-                <div className="bg-gray-100 rounded-lg">
-                    <div className="grid grid-cols-4 gap-4 p-4 font-semibold text-gray-700 border-b">
-                        <div>ROLE NAME</div>
-                        <div>DESCRIPTION</div>
-                        <div>PERMISSIONS</div>
-                        <div>ACTIONS</div>
-                    </div>
-                    {rolesInfo?.map((role) => (
-                        <div
-                            key={role?._id}
-                            className="grid grid-cols-4 gap-4 items-center p-4 border-b"
-                        >
-                            <div className="font-bold">{role?.roleName}</div>
-                            <div className="text-gray-600">{role?.description}</div>
-                            <div className="flex gap-2">
-                                {/* Placeholder for permissions */}
-                                {/* <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded-full text-xs">
-                                    {role?.permission}
-                                </span> */}
-                            </div>
-                            <div className="flex gap-2">
-                                <button className="text-black font-bold py-1 px-2 rounded">
-                                    <LuPen />
-                                </button>
-                                <button className="text-red-600 font-bold py-1 px-2 rounded">
-                                    <RiDeleteBin6Line />
-                                </button>
-                            </div>
-                        </div>
-                    ))}
+                <div className="overflow-x-auto bg-gray-100 rounded-lg">
+                    <table className="min-w-full bg-white">
+                        <thead>
+                            <tr className="bg-gray-100 border-b text-gray-700 font-semibold text-left">
+                                <th className="p-4">ROLE NAME</th>
+                                <th className="p-4">DESCRIPTION</th>
+                                <th className="p-4">PERMISSIONS</th>
+                                <th className="p-4">ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {rolesInfo?.map((role) => (
+                                <tr key={role?._id} className="border-b">
+                                    <td className="p-4 font-bold">{role?.roleName}</td>
+                                    <td className="p-4 text-gray-600">{role?.description}</td>
+                                    <td className="p-4">
+                                        <div className="flex gap-2">
+                                            {/* Placeholder for permissions */}
+                                            {/* <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded-full text-xs">
+                                {role?.permission}
+                            </span> */}
+                                        </div>
+                                    </td>
+                                    <td className="p-4">
+                                        <div className="flex gap-2">
+                                            <button className="text-black font-bold py-1 px-2 rounded">
+                                                <LuPen />
+                                            </button>
+                                            <button className="text-red-600 font-bold py-1 px-2 rounded">
+                                                <RiDeleteBin6Line />
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </main>
