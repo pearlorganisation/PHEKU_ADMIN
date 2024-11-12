@@ -28,10 +28,12 @@ const Sidebar = () => {
                   Create Role
                 </li>
                 </Link>
-              
-                <li className="hover:text-gray-300 cursor-pointer">
-                  List Roles
-                </li>
+                <Link to="/roles">
+                  <li className="hover:text-gray-300 cursor-pointer">
+                    List Roles
+                  </li>
+                </Link>
+                 
               </ul>
             )}
           </div>

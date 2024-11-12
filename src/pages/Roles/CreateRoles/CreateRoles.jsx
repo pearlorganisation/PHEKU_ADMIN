@@ -20,7 +20,7 @@ const CreateRoles = () => {
                       type="text"
                       id="roleName"
                       {...register("roleName", { required: "Role name is required" })}
-                      className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="mt-1 p-2 block w-full rounded-md border-purple-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
                   {errors.roleName && <p className="text-red-500 text-sm mt-1">{errors.roleName.message}</p>}
               </div>
@@ -29,11 +29,10 @@ const CreateRoles = () => {
                   <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
                   <textarea
                       id="description"
-                      {...register("description")}  
-                      className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      {...register("description")}
+                      className="mt-1 p-2 block w-full rounded-md border-purple-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
               </div>
-
 
               <button
                   type="submit"
