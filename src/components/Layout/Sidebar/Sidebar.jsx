@@ -3,6 +3,7 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const Sidebar = () => {
   const [isBlogsOpen, setIsBlogsOpen] = useState(false);
+  const [isRolesOpen, setIsRolesOpen] = useState(false);
   return (
     <div>
       <aside className="bg-gray-800 text-white w-64 py-8 px-4 fixed top-0 bottom-0 z-10">
@@ -10,6 +11,7 @@ const Sidebar = () => {
           <h2 className="text-2xl font-bold">PHEKU</h2>
         </div>
         <nav>
+          {/* Blogs Section */}
           <div className="mb-4">
             <div
               onClick={() => setIsBlogsOpen(!isBlogsOpen)}
@@ -25,6 +27,27 @@ const Sidebar = () => {
                 </li>
                 <li className="hover:text-gray-300 hover:cursor-pointer">
                   List Blogs
+                </li>
+              </ul>
+            )}
+          </div>
+
+          {/* Roles Section */}
+          <div className="mb-4">
+            <div
+              onClick={() => setIsRolesOpen(!isRolesOpen)}
+              className="flex justify-between items-center cursor-pointer hover:text-gray-300"
+            >
+              <span>Roles</span>
+              {isRolesOpen ? <FaChevronUp /> : <FaChevronDown />}
+            </div>
+            {isRolesOpen && (
+              <ul className="mt-2 ml-4 space-y-2">
+                <li className="hover:text-gray-300 cursor-pointer">
+                  Create Role
+                </li>
+                <li className="hover:text-gray-300 cursor-pointer">
+                  List Roles
                 </li>
               </ul>
             )}
