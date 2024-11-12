@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LayoutComponent from "./components/Layout/LayoutComponent";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import CreateRoles from "./pages/Roles/CreateRoles/CreateRoles";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
         index: true,
         element: <Dashboard />,
       },
+      {
+        path:"create-roles",
+        element: <CreateRoles />
+      }
     ],
   },
 ]);
