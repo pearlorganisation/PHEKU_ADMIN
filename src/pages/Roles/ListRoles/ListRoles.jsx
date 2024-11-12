@@ -59,12 +59,12 @@ const ListRoles = () => {
                                     <td className="p-4 font-bold">{role?.roleName}</td>
                                     <td className="p-4 text-gray-600">{role?.description}</td>
                                     <td className="p-4">
-                                        <div className="flex gap-2">
-                                            {/* Placeholder for permissions */}
-                                            {/* <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded-full text-xs">
+                                        {/* <div className="flex gap-2">
+                                            Placeholder for permissions
+                                            <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded-full text-xs">
                                 {role?.permission}
-                            </span> */}
-                                        </div>
+                            </span>
+                                        </div> */}
                                     </td>
                                     <td className="p-4">
                                         <div className="flex gap-2">
