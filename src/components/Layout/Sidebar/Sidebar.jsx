@@ -11,27 +11,6 @@ const Sidebar = () => {
           <h2 className="text-2xl font-bold">PHEKU</h2>
         </div>
         <nav>
-          {/* Blogs Section */}
-          <div className="mb-4">
-            <div
-              onClick={() => setIsBlogsOpen(!isBlogsOpen)}
-              className="flex justify-between items-center cursor-pointer hover:text-gray-300"
-            >
-              <span>Blogs</span>
-              {isBlogsOpen ? <FaChevronUp /> : <FaChevronDown />}
-            </div>
-            {isBlogsOpen && (
-              <ul className="mt-2 ml-4 space-y-2">
-                <li className="hover:text-gray-300 hover:cursor-pointer">
-                  Create Blog
-                </li>
-                <li className="hover:text-gray-300 hover:cursor-pointer">
-                  List Blogs
-                </li>
-              </ul>
-            )}
-          </div>
-
           {/* Roles Section */}
           <div className="mb-4">
             <div
@@ -48,6 +27,27 @@ const Sidebar = () => {
                 </li>
                 <li className="hover:text-gray-300 cursor-pointer">
                   List Roles
+                </li>
+              </ul>
+            )}
+          </div>
+
+          {/* Blogs Section */}
+          <div className="mb-4">
+            <div
+              onClick={() => setIsBlogsOpen(!isBlogsOpen)}
+              className="flex justify-between items-center cursor-pointer hover:text-gray-300"
+            >
+              <span>Blogs</span>
+              {isBlogsOpen ? <FaChevronUp /> : <FaChevronDown />}
+            </div>
+            {isBlogsOpen && (
+              <ul className="mt-2 ml-4 space-y-2">
+                <li className="hover:text-gray-300 hover:cursor-pointer">
+                  Create Blog
+                </li>
+                <li className="hover:text-gray-300 hover:cursor-pointer">
+                  List Blogs
                 </li>
               </ul>
             )}
