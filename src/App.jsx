@@ -15,13 +15,17 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path:"/create-roles",
-        element: <CreateRoles />
+        path: "/create-roles",
+        element: <CreateRoles />,
       },
       {
-        path:"/roles",
-        element: <ListRoles />
-      }
+        path: "/roles",
+        element: <ListRoles />,
+      },
+      // {
+      //   path: "/create-users",
+      //   element: <ListRoles />,
+      // },
     ],
   },
 ]);
