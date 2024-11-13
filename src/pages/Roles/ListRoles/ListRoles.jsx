@@ -21,6 +21,9 @@ const ListRoles = () => {
         return <div>Error: {error}</div>; // Display error message
     }
 
+
+    console.log(rolesInfo,"roles info");
+
     return (
         <main className="flex-1 p-8 mt-16 ml-64">
             <div className="text-4xl font-bold mb-6 flex justify-between items-center">
@@ -54,17 +57,12 @@ const ListRoles = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {rolesInfo?.map((role) => (
+                            {Array.isArray(rolesInfo) && rolesInfo?.map((role) => (
                                 <tr key={role?._id} className="border-b">
                                     <td className="p-4 font-bold">{role?.roleName}</td>
                                     <td className="p-4 text-gray-600">{role?.description}</td>
                                     <td className="p-4">
-                                        {/* <div className="flex gap-2">
-                                            Placeholder for permissions
-                                            <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded-full text-xs">
-                                {role?.permission}
-                            </span>
-                                        </div> */}
+                                       
                                     </td>
                                     <td className="p-4">
                                         <div className="flex gap-2">
