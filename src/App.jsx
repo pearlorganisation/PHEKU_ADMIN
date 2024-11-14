@@ -5,6 +5,11 @@ import CreateRoles from "./pages/Roles/CreateRoles/CreateRoles";
 import ListRoles from "./pages/Roles/ListRoles/ListRoles";
 import EditRole from "./pages/EditRole/EditRole";
 import Login from "./pages/Login/Login";
+import ListBlogs from "./pages/ListBlogs/ListBlogs";
+import CreateBlogs from "./pages/CreateBlogs/CreateBlogs";
+import CreateBlogCategory from "./pages/CreateBlogCategory/CreateBlogCategory";
+import ListBlogCategory from "./pages/ListBlogCategory/ListBlogCategory";
+import EditBlog from "./pages/EditBlog/EditBlog";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +35,32 @@ const router = createBrowserRouter([
       {
         path: "create-roles",
         element: <CreateRoles />,
+        path: "/create-roles",
+        element: <CreateRoles />,
+      },
+      {
+        path: "/roles",
+        element: <ListRoles />,
+      },
+      {
+        path: "/blogs",
+        element: <ListBlogs />,
+      },
+      {
+        path: "/create-blogs",
+        element: <CreateBlogs />,
+      },
+      {
+        path: "/create-blogCat",
+        element: <CreateBlogCategory />,
+      },
+      {
+        path: "/blogCategories",
+        element: <ListBlogCategory />,
+      },
+      {
+        path: "editblog/:slug",
+        element: <EditBlog />,
       },
     ],
   },

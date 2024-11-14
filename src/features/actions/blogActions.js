@@ -3,11 +3,11 @@ import { axiosInstance } from "../../services/axiosInterceptor";
 
 export const getBlogs = createAsyncThunk(
   "blog/get",
-  async (_, { rejectWithValue }) => {
+  async ({ page = 1 }, { rejectWithValue }) => {
     try {
-      const { data } = await axiosInstance.get(`blogs`);
+      const { data } = await axiosInstance.get(`/api/v1/blogs?page=${page}`);
 
-      return data.data;
+      return data;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -18,7 +18,7 @@ export const getSingleBlog = createAsyncThunk(
   "singleblog/get",
   async (id, { rejectWithValue }) => {
     try {
-      const { data } = await instance.get(`blogs/${id}`);
+      const { data } = await axiosInstance.get(`/api/v1/blogs/${id}`);
 
       return data.data;
     } catch (error) {
@@ -35,15 +35,16 @@ export const createBlogs = createAsyncThunk(
     try {
       const formData = new FormData();
 
-      formData.append("blogImage", userdata.blogImage[0]);
+      formData.append("thumbImage", userdata.thumbImage[0]);
 
       for (const key in userdata) {
-        if (key !== "blogImage") {
+        if (key !== "thumbImage") {
+          console.log(key);
           formData.append(key, userdata[key]);
         }
       }
 
-      const { data } = await instance.post(`blogs`, formData, {
+      const { data } = await axiosInstance.post(`/api/v1/blogs`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -60,7 +61,7 @@ export const updateBlog = createAsyncThunk(
   "blog/put",
   async ({ id, data }, { rejectWithValue }) => {
     try {
-      const response = await instance.put(`blogs/${id}`, data);
+      const response = await axiosInstance.put(`/api/v1/blogs/${id}`, data);
       console.log(response, "response");
       return response?.data;
     } catch (error) {
@@ -73,7 +74,39 @@ export const deleteBlog = createAsyncThunk(
   "blog/delete",
   async (id, thunkAPI) => {
     try {
-      const { data } = await instance.delete(`blogs/${id}`);
+      const { data } = await axiosInstance.delete(`/api/v1/blogs/${id}`);
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const createBlogCategory = createAsyncThunk(
+  "blog/createCategory",
+  async (blogCategoryName, thunkAPI) => {
+    try {
+      console.log(blogCategoryName, "blog Cat Name");
+      const { data } = await axiosInstance.post(
+        `/api/v1/blogs/categories`,
+        blogCategoryName
+      );
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const getBlogCategories = createAsyncThunk(
+  "blog/getBlogCategories",
+  async ({ page = 1 }, thunkAPI) => {
+    try {
+      const { data } = await axiosInstance.get(
+        `/api/v1/blogs/categories?page=${page}`
+      );
 
       return data;
     } catch (error) {
