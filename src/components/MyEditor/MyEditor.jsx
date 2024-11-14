@@ -11,7 +11,7 @@ const MyEditor = () => {
   return (
     <div>
       <Editor
-        apiKey="dhm3eu0whan613giuz6tbrnhapiqxbkn4nim37evykzifmar" // Obtain this from https://www.tiny.cloud/
+        apiKey="dhm3eu0whan613giuz6tbrnhapiqxbkn4nim37evykzifmar"
         value={content}
         init={{
           height: 500,

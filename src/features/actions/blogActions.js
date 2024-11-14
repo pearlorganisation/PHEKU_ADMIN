@@ -3,11 +3,11 @@ import { axiosInstance } from "../../services/axiosInterceptor";
 
 export const getBlogs = createAsyncThunk(
   "blog/get",
-  async (_, { rejectWithValue }) => {
+  async ({ page = 1 }, { rejectWithValue }) => {
     try {
-      const { data } = await axiosInstance.get(`/api/v1/blogs`);
+      const { data } = await axiosInstance.get(`/api/v1/blogs?page=${page}`);
 
-      return data.data;
+      return data;
     } catch (error) {
       return rejectWithValue(error);
     }

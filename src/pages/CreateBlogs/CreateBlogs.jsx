@@ -236,6 +236,27 @@ const CreateBlogs = () => {
             )}
           </div>
 
+          {/*Slug*/}
+
+          <div className="mb-6">
+            <label
+              htmlFor="title"
+              className="block mb-2 text-sm font-medium text-gray-700"
+            >
+              Slug
+            </label>
+            <input
+              type="text"
+              {...register("slug")}
+              readOnly
+              className={`shadow-sm bg-gray-50 border ${
+                errors.slug ? "border-red-500" : "border-gray-300"
+              } 
+                            text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
+                            block w-full p-2.5`}
+            />
+          </div>
+
           {/* Author*/}
           <div className="mb-6">
             <label
@@ -260,27 +281,6 @@ const CreateBlogs = () => {
                 {errors.author.message}
               </p>
             )}
-          </div>
-
-          {/*Slug*/}
-
-          <div className="mb-6">
-            <label
-              htmlFor="title"
-              className="block mb-2 text-sm font-medium text-gray-700"
-            >
-              Slug
-            </label>
-            <input
-              type="text"
-              {...register("slug")}
-              readOnly
-              className={`shadow-sm bg-gray-50 border ${
-                errors.slug ? "border-red-500" : "border-gray-300"
-              } 
-                            text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
-                            block w-full p-2.5`}
-            />
           </div>
 
           {/* Date Field

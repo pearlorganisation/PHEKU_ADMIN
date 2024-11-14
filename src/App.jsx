@@ -7,6 +7,7 @@ import ListBlogs from "./pages/ListBlogs/ListBlogs";
 import CreateBlogs from "./pages/CreateBlogs/CreateBlogs";
 import CreateBlogCategory from "./pages/CreateBlogCategory/CreateBlogCategory";
 import ListBlogCategory from "./pages/ListBlogCategory/ListBlogCategory";
+import EditBlog from "./pages/EditBlog/EditBlog";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/blogCategories",
         element: <ListBlogCategory />,
+      },
+      {
+        path: "editblog/:id",
+        element: <EditBlog />,
       },
     ],
   },
