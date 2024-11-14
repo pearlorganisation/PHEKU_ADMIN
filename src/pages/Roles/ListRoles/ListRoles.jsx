@@ -45,11 +45,11 @@ import ConfirmDeleteModal from '../../../components/ConfirmModal/ConfirmDeleteMo
              <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                  <div className="pb-4 bg-white dark:bg-gray-900 flex justify-between">
                      <input type="text" id="table-search" className="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50" placeholder="Search for items" />
-                     <Link to="/create-roles">
-                         <button className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 font-medium rounded-lg text-sm px-4 py-2">
+                     <a href="create-roles">
+                         <span className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 font-medium rounded-lg text-sm px-4 py-2">
                              Add Role
-                         </button>
-                     </Link>
+                         </span>
+                     </a>
                  </div>
                  <table className="w-full text-sm text-left text-gray-500">
                      <thead className="text-xs text-gray-700 uppercase bg-gray-50">
@@ -67,7 +67,7 @@ import ConfirmDeleteModal from '../../../components/ConfirmModal/ConfirmDeleteMo
                                  <td className="px-6 py-4">{role.description || "No description available"}</td>
                                  <td className="px-6 py-4">{role.permissions?.join(", ") || "No permissions available"}</td>
                                  <td className="px-6 py-4 flex gap-2">
-                                     <Link to={`/roles/${role._id}`} className="font-medium text-blue-600 hover:underline">Edit</Link>
+                                     <Link to={`${role._id}`} className="font-medium text-blue-600 hover:underline">Edit</Link>
                                      <button onClick={() => handleDelete(role._id)}>
                                          <RiDeleteBin6Line size={20} color='red' />
                                      </button>

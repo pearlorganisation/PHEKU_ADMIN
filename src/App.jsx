@@ -4,29 +4,33 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import CreateRoles from "./pages/Roles/CreateRoles/CreateRoles";
 import ListRoles from "./pages/Roles/ListRoles/ListRoles";
 import EditRole from "./pages/EditRole/EditRole";
+import Login from "./pages/Login/Login";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Login />,
+  },
+  {
+    path: "/dashboard",
     element: <LayoutComponent />,
-
     children: [
       {
         index: true,
         element: <Dashboard />,
+      },    
+      {
+        path: "roles",  
+        element: <ListRoles />,
       },
       {
-        path:"/create-roles",
-        element: <CreateRoles />
+        path: "roles/:id",  
+        element: <EditRole />,
       },
       {
-        path:"/roles",
-        element: <ListRoles />
+        path: "create-roles",
+        element: <CreateRoles />,
       },
-      {
-        path:"/roles/:id",
-        element: <EditRole />
-      }
     ],
   },
 ]);

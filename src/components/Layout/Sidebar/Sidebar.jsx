@@ -23,12 +23,12 @@ const Sidebar = () => {
             </div>
             {isRolesOpen && (
               <ul className="mt-2 ml-4 space-y-2">
-                <Link to="/create-roles">  
+                <Link to="create-roles">  
                  <li className="hover:text-gray-300 cursor-pointer">
                   Create Role
                 </li>
                 </Link>
-                <Link to="/roles">
+                <Link to="roles">
                   <li className="hover:text-gray-300 cursor-pointer">
                     List Roles
                   </li>
