@@ -35,27 +35,23 @@ const router = createBrowserRouter([
       {
         path: "create-roles",
         element: <CreateRoles />,
-        path: "/create-roles",
-        element: <CreateRoles />,
+      
       },
+    
       {
-        path: "/roles",
-        element: <ListRoles />,
-      },
-      {
-        path: "/blogs",
+        path: "blogs",
         element: <ListBlogs />,
       },
       {
-        path: "/create-blogs",
+        path: "create-blogs",
         element: <CreateBlogs />,
       },
       {
-        path: "/create-blogCat",
+        path: "create-blogCat",
         element: <CreateBlogCategory />,
       },
       {
-        path: "/blogCategories",
+        path: "blogCategories",
         element: <ListBlogCategory />,
       },
       {
