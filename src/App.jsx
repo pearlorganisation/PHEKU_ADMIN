@@ -3,6 +3,7 @@ import LayoutComponent from "./components/Layout/LayoutComponent";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import CreateRoles from "./pages/Roles/CreateRoles/CreateRoles";
 import ListRoles from "./pages/Roles/ListRoles/ListRoles";
+import EditRole from "./pages/EditRole/EditRole";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path:"/roles",
         element: <ListRoles />
+      },
+      {
+        path:"/roles/:id",
+        element: <EditRole />
       }
     ],
   },
