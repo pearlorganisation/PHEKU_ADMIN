@@ -15,6 +15,7 @@ const intialState = {
   blogCategory: {},
   singleBlog: {},
   paginate: {},
+  blogsCatPaginate: {},
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -130,7 +131,8 @@ const blogSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.isUpdated = true;
-        state.blogCategories = action.payload;
+        state.blogCategories = action.payload.data;
+        state.blogsCatPaginate = action.payload.metadata;
       })
       .addCase(getBlogCategories.rejected, (state, action) => {
         state.isLoading = false;

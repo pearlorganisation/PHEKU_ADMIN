@@ -294,7 +294,7 @@ const ListBlogs = () => {
                               </button>
                               <li>
                                 <Link
-                                  to={`/editblog/${blog._id}`}
+                                  to={`/editblog/${blog.slug}`}
                                   className="block py-2 px-4 bg-blue-500  rounded-md"
                                 >
                                   Edit
