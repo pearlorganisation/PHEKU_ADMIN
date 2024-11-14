@@ -6,7 +6,6 @@ const Sidebar = () => {
   const [isUsersOpen, setIsUsersOpen] = useState(false);
   const [isRolesOpen, setIsRolesOpen] = useState(false);
   const [isBlogsOpen, setIsBlogsOpen] = useState(false);
-  const [isRolesOpen, setIsRolesOpen] = useState(false);
 
   const [isBlogsCatOpen, setIsBlogsCatOpen] = useState(false);
   return (
