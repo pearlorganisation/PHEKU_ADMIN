@@ -26,18 +26,14 @@ const Sidebar = () => {
             </div>
             {/* {isRolesOpen && (
               <ul className="mt-2 ml-4 space-y-2">
-                <Link to="create-roles">  
-                 <li className="hover:text-gray-300 cursor-pointer">
-                  Create Role
-                </li>
-                <Link to="/create-roles">
+                <Link to="create-roles">
                   <li className="text-gray-300  hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
                     <div className="flex flex-row gap-3 items-center justify-start">
                       <RiUpload2Fill /> <span>Create Role</span>
                     </div>
                   </li>
                 </Link>
-                <Link to="/roles">
+                <Link to="roles">
                   <li className="text-gray-300  hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
                     <div className="flex flex-row gap-3 items-center justify-start">
                       <RiUpload2Fill /> <span>List Roles</span>
@@ -87,28 +83,28 @@ const Sidebar = () => {
                   )}
                 </div> */}
 
-                <Link to="/create-blogCat">
+                <Link to="create-blogCat">
                   <li className="text-gray-300  hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
                     <div className="flex flex-row gap-3 items-center justify-start">
                       <RiUpload2Fill /> <span>Create Blog Category</span>
                     </div>
                   </li>
                 </Link>
-                <Link to="/blogCategories">
+                <Link to="blogCategories">
                   <li className="text-gray-300  hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
                     <div className="flex flex-row gap-3 items-center justify-start">
                       <RiUpload2Fill /> <span> List Blog Categories</span>
                     </div>
                   </li>
                 </Link>
-                <Link to="/create-blogs">
+                <Link to="create-blogs">
                   <li className="text-gray-300  hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
                     <div className="flex flex-row gap-3 items-center justify-start">
                       <RiUpload2Fill /> <span> Create Blogs </span>
                     </div>
                   </li>
                 </Link>
-                <Link to="/blogs">
+                <Link to="blogs">
                   <li className="text-gray-300  hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
                     <div className="flex flex-row gap-3 items-center justify-start">
                       <RiUpload2Fill /> <span> List Blogs </span>
