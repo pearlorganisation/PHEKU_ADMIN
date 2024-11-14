@@ -12,7 +12,7 @@ export const adminLogin = createAsyncThunk(
         },
       };
       const { data } = await axiosInstance.post(
-        `/auth/login`,
+        `/api/v1/auth/login`,
         { email, password },
         config
       );

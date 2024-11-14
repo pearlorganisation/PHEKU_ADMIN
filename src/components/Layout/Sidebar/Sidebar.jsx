@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 const Sidebar = () => {
   const [isBlogsOpen, setIsBlogsOpen] = useState(false);
   const [isRolesOpen, setIsRolesOpen] = useState(false);
+
+  const [isBlogsCatOpen, setIsBlogsCatOpen] = useState(false);
   return (
     <div>
       <aside className="bg-gray-800 text-white w-64 py-8 px-4 fixed top-0 bottom-0 z-10">
@@ -23,17 +25,41 @@ const Sidebar = () => {
             </div>
             {isRolesOpen && (
               <ul className="mt-2 ml-4 space-y-2">
-                <Link to="/create-roles">  
-                 <li className="hover:text-gray-300 cursor-pointer">
-                  Create Role
-                </li>
+                <Link to="/create-roles">
+                  <li className="hover:text-gray-300 cursor-pointer">
+                    Create Role
+                  </li>
                 </Link>
                 <Link to="/roles">
                   <li className="hover:text-gray-300 cursor-pointer">
                     List Roles
                   </li>
                 </Link>
-                 
+              </ul>
+            )}
+          </div>
+
+          {/* Blogs Category Section */}
+          <div className="mb-4">
+            <div
+              onClick={() => setIsBlogsCatOpen(!isBlogsCatOpen)}
+              className="flex justify-between items-center cursor-pointer hover:text-gray-300"
+            >
+              <span>Blogs Category </span>
+              {isBlogsCatOpen ? <FaChevronUp /> : <FaChevronDown />}
+            </div>
+            {isBlogsCatOpen && (
+              <ul className="mt-2 ml-4 space-y-2">
+                <Link to="/create-blogCat">
+                  <li className="hover:text-gray-300 cursor-pointer">
+                    Create Blog Category
+                  </li>
+                </Link>
+                <Link to="/blogCategories">
+                  <li className="hover:text-gray-300 cursor-pointer">
+                    List Blog Categories
+                  </li>
+                </Link>
               </ul>
             )}
           </div>
@@ -49,12 +75,16 @@ const Sidebar = () => {
             </div>
             {isBlogsOpen && (
               <ul className="mt-2 ml-4 space-y-2">
-                <li className="hover:text-gray-300 hover:cursor-pointer">
-                  Create Blog
-                </li>
-                <li className="hover:text-gray-300 hover:cursor-pointer">
-                  List Blogs
-                </li>
+                <Link to="/create-blogs">
+                  <li className="hover:text-gray-300 cursor-pointer">
+                    Create Blogs
+                  </li>
+                </Link>
+                <Link to="/blogs">
+                  <li className="hover:text-gray-300 cursor-pointer">
+                    List Blogs
+                  </li>
+                </Link>
               </ul>
             )}
           </div>
