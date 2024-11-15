@@ -114,16 +114,3 @@ export const getBlogCategories = createAsyncThunk(
     }
   }
 );
-
-export const getBlogCategories = createAsyncThunk(
-  "blog/getBlogCategories",
-  async (_, thunkAPI) => {
-    try {
-      const { data } = await axiosInstance.get(`/api/v1/blogs/categories`);
-
-      return data.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
