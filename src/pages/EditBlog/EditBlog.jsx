@@ -2,14 +2,14 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 const EditBlog = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
 
-  console.log(id, "id from params");
+  console.log(slug, "id from params");
   return (
     <div className="ml-72 mt-20">
       <h1> Edit Blog Page </h1>
 
-      <h1> Blog Id : {id}</h1>
+      <h1> Blog Id : {slug}</h1>
     </div>
   );
 };

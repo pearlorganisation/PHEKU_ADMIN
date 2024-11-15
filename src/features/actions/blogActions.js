@@ -102,6 +102,21 @@ export const createBlogCategory = createAsyncThunk(
 
 export const getBlogCategories = createAsyncThunk(
   "blog/getBlogCategories",
+  async ({ page = 1 }, thunkAPI) => {
+    try {
+      const { data } = await axiosInstance.get(
+        `/api/v1/blogs/categories?page=${page}`
+      );
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const getBlogCategories = createAsyncThunk(
+  "blog/getBlogCategories",
   async (_, thunkAPI) => {
     try {
       const { data } = await axiosInstance.get(`/api/v1/blogs/categories`);
