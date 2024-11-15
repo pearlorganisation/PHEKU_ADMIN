@@ -4,6 +4,7 @@ import { RiUpload2Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
+  const [isUsersOpen, setIsUsersOpen] = useState(false);
   const [isBlogsOpen, setIsBlogsOpen] = useState(false);
   const [isRolesOpen, setIsRolesOpen] = useState(false);
   return (
@@ -13,6 +14,30 @@ const Sidebar = () => {
           <h2 className="text-2xl font-bold">PHEKU</h2>
         </div>
         <nav>
+          {/* User Section */}
+          <div className="mb-4">
+            <div
+              onClick={() => setIsUsersOpen(!isUsersOpen)}
+              className="flex justify-between items-center cursor-pointer hover:text-gray-300"
+            >
+              <span>User</span>
+              {isUsersOpen ? <FaChevronUp /> : <FaChevronDown />}
+            </div>
+            {isUsersOpen && (
+              <ul className="mt-2 ml-4 space-y-2">
+                <Link to="/create-users">
+                  <li className="hover:text-gray-300 cursor-pointer">
+                    Create User
+                  </li>
+                </Link>
+                <Link to="/assign-roles">
+                  <li className="hover:text-gray-300 cursor-pointer">
+                    Assign Roles
+                  </li>
+                </Link>
+              </ul>
+            )}
+          </div>
           {/* Roles Section */}
           <div className="mb-4">
             <div
@@ -49,53 +74,29 @@ const Sidebar = () => {
             </div>
             {isBlogsOpen && (
               <ul className="mt-2 ml-4 space-y-2">
-                {/* <div className="mb-4">
-                  <div
-                    onClick={() => setIsBlogsCatOpen(!isBlogsCatOpen)}
-                    className="flex justify-between items-center cursor-pointer hover:text-gray-300"
-                  >
-                    <span>Blogs Category </span>
-                    {isBlogsCatOpen ? <FaChevronUp /> : <FaChevronDown />}
-                  </div>
-                  {isBlogsCatOpen && (
-                    <ul className="mt-2 ml-4 space-y-2">
-                      <Link to="/create-blogCat">
-                        <li className="hover:text-gray-300 cursor-pointer">
-                          Create Blog Category
-                        </li>
-                      </Link>
-                      <Link to="/blogCategories">
-                        <li className="hover:text-gray-300 cursor-pointer">
-                          List Blog Categories
-                        </li>
-                      </Link>
-                    </ul>
-                  )}
-                </div> */}
-
                 <Link to="create-blogCat">
-                  <li className="text-gray-300  hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
                     <div className="flex flex-row gap-3 items-center justify-start">
                       <RiUpload2Fill /> <span>Create Blog Category</span>
                     </div>
                   </li>
                 </Link>
                 <Link to="blogCategories">
-                  <li className="text-gray-300  hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
                     <div className="flex flex-row gap-3 items-center justify-start">
                       <RiUpload2Fill /> <span> List Blog Categories</span>
                     </div>
                   </li>
                 </Link>
                 <Link to="create-blogs">
-                  <li className="text-gray-300  hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
                     <div className="flex flex-row gap-3 items-center justify-start">
                       <RiUpload2Fill /> <span> Create Blogs </span>
                     </div>
                   </li>
                 </Link>
                 <Link to="blogs">
-                  <li className="text-gray-300  hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
                     <div className="flex flex-row gap-3 items-center justify-start">
                       <RiUpload2Fill /> <span> List Blogs </span>
                     </div>
