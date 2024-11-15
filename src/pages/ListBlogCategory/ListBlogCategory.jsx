@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBlogs } from "../../features/actions/blogActions";
-import moment from "moment";
+import { getBlogCategories } from "../../features/actions/blogActions";
 import { Link } from "react-router-dom";
-import ViewModal from "../../components/ViewModal/ViewModal";
 import Pagination from "../../components/Pagination/Pagination";
 
-const ListBlogs = () => {
+const ListBlogCategory = () => {
+  const { blogCategories, blogsCatPaginate } = useSelector(
+    (state) => state.blog
+  );
   const dispatch = useDispatch();
-  const { blogs, paginate } = useSelector((state) => state.blog);
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(paginate?.total / paginate?.limit);
+  const totalPages = Math.ceil(
+    blogsCatPaginate?.total / blogsCatPaginate?.limit
+  );
 
   const handlePageClick = (page) => {
     console.log(page, "current page");
@@ -21,20 +23,9 @@ const ListBlogs = () => {
     }
   };
 
-  console.log(currentPage, "current new page MDX");
-
   useEffect(() => {
-    dispatch(getBlogs({ page: currentPage }));
+    dispatch(getBlogCategories({ page: currentPage }));
   }, [dispatch, currentPage]);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
-  const [blog, setBlog] = useState(null);
-
-  console.log(paginate, "my paginate data");
 
   return (
     <div className="ml-52 mt-20">
@@ -74,7 +65,7 @@ const ListBlogs = () => {
                 </form>
               </div>
               <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                <a href={`create-blogs`}>
+                <Link to={`create-blogCat`}>
                   <button
                     type="button"
                     className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
@@ -92,9 +83,9 @@ const ListBlogs = () => {
                         d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
                       />
                     </svg>
-                    Create Blog
+                    Create Blog Category
                   </button>
-                </a>
+                </Link>
                 <div className="flex items-center space-x-3 w-full md:w-auto">
                   <button
                     id="filterDropdownButton"
@@ -224,77 +215,41 @@ const ListBlogs = () => {
                       S.No
                     </th>
                     <th scope="col" className="px-4 py-3">
-                      Blog Image
+                      Blog Category
                     </th>
-                    <th scope="col" className="px-4 py-3">
-                      Blog Title
-                    </th>
-                    <th scope="col" className="px-2 py-3">
-                      Author
-                    </th>
-                    <th scope="col" className="px-2 py-3">
-                      Category
-                    </th>
-                    <th scope="col" className="px-2 py-3">
-                      Published At
-                    </th>
+
                     <th
                       scope="col"
-                      className="px-4 py-3 flex items-center justify-end mr-20"
+                      className="px-4 py-3 flex items-center mr-16 justify-end"
                     >
                       Actions
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {Array.isArray(blogs) &&
-                    blogs?.map((blog, index) => (
+                  {Array.isArray(blogCategories) &&
+                    blogCategories?.map((blog, index) => (
                       <tr
                         key={blog._id}
                         className="border-b dark:border-gray-700"
                       >
-                        <td className="px-4 py-3">
-                          {paginate?.limit * (currentPage - 1) + index + 1}
-                        </td>
                         <th
                           scope="row"
                           className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                         >
-                          <img
-                            src={
-                              blog.thumbImage.secure_url
-                                ? blog.thumbImage.secure_url
-                                : "https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
-                            }
-                            // src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
-                            alt={blog.title}
-                            className="w-20 h-20 mr-3"
-                          />
+                          {blogsCatPaginate?.limit * (currentPage - 1) +
+                            index +
+                            1}
                         </th>
-                        <td className="px-4 py-3">{blog.title}</td>
-                        <td className="px-2 py-3">{blog?.author?.fullName}</td>
-                        <td className="px-2 py-3">
-                          {blog.category.blogCategoryName}
-                        </td>
-                        <td className="px-2 py-3">
-                          {moment(blog.publishedAt).format("D MMM YYYY")}
-                        </td>
+
+                        <td className="px-2 py-3">{blog.blogCategoryName}</td>
+
                         <td className="px-4 py-3 flex items-center justify-end">
                           <div className=" bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                             <ul className="py-1 text-sm text-gray-700 dark:text-gray-200 flex flex-row gap-3 mt-5">
-                              <button
-                                className=" rounded-md bg-green-500 px-4 py-2 hover:text-blue-600 text-center"
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  openModal();
-                                  setBlog(blog);
-                                }}
-                              >
-                                View
-                              </button>
                               <li>
                                 <a
-                                  href={`editblog/${blog.slug}`}
+                                  href="#"
                                   className="block py-2 px-4 bg-blue-500  rounded-md"
                                 >
                                   Edit
@@ -317,24 +272,18 @@ const ListBlogs = () => {
                 </tbody>
               </table>
             </div>
-          </div>
 
-          <Pagination
-            paginate={paginate}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            handlePageClick={handlePageClick}
-          />
+            <Pagination
+              paginate={blogsCatPaginate}
+              currentPage={currentPage}
+              totalPages={totalPages}
+              handlePageClick={handlePageClick}
+            />
+          </div>
         </div>
       </section>
-
-      {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50 p-4">
-          <ViewModal data={blog} isOpen={isModalOpen} onClose={closeModal} />
-        </div>
-      )}
     </div>
   );
 };
 
-export default ListBlogs;
+export default ListBlogCategory;
