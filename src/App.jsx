@@ -10,11 +10,6 @@ import ListBlogCategory from "./pages/ListBlogCategory/ListBlogCategory";
 import EditBlog from "./pages/EditBlog/EditBlog";
 import EditRole from "./pages/EditRole/EditRole";
 import Login from "./pages/Login/Login";
-import ListBlogs from "./pages/ListBlogs/ListBlogs";
-import CreateBlogs from "./pages/CreateBlogs/CreateBlogs";
-import CreateBlogCategory from "./pages/CreateBlogCategory/CreateBlogCategory";
-import ListBlogCategory from "./pages/ListBlogCategory/ListBlogCategory";
-import EditBlog from "./pages/EditBlog/EditBlog";
 
 const router = createBrowserRouter([
   {

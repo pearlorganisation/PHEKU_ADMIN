@@ -24,7 +24,7 @@ const Sidebar = () => {
               <span>Roles</span>
               {isRolesOpen ? <FaChevronUp /> : <FaChevronDown />}
             </div>
-            {/* {isRolesOpen && (
+            {isRolesOpen && (
               <ul className="mt-2 ml-4 space-y-2">
                 <Link to="create-roles">
                   <li className="text-gray-300  hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
@@ -41,7 +41,7 @@ const Sidebar = () => {
                   </li>
                 </Link>
               </ul>
-            )} */}
+            )}
           
 
           </div>
