@@ -3,49 +3,33 @@ import LayoutComponent from "./components/Layout/LayoutComponent";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import CreateRoles from "./pages/Roles/CreateRoles/CreateRoles";
 import ListRoles from "./pages/Roles/ListRoles/ListRoles";
-import ListBlogs from "./pages/ListBlogs/ListBlogs";
-import CreateBlogs from "./pages/CreateBlogs/CreateBlogs";
-import CreateBlogCategory from "./pages/CreateBlogCategory/CreateBlogCategory";
-import ListBlogCategory from "./pages/ListBlogCategory/ListBlogCategory";
-import EditBlog from "./pages/EditBlog/EditBlog";
+import EditRole from "./pages/EditRole/EditRole";
+import Login from "./pages/Login/Login";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Login />,
+  },
+  {
+    path: "/dashboard",
     element: <LayoutComponent />,
-
     children: [
       {
         index: true,
         element: <Dashboard />,
-      },
+      },    
       {
-        path: "/create-roles",
-        element: <CreateRoles />,
-      },
-      {
-        path: "/roles",
+        path: "roles",  
         element: <ListRoles />,
       },
       {
-        path: "/blogs",
-        element: <ListBlogs />,
+        path: "roles/:id",  
+        element: <EditRole />,
       },
       {
-        path: "/create-blogs",
-        element: <CreateBlogs />,
-      },
-      {
-        path: "/create-blogCat",
-        element: <CreateBlogCategory />,
-      },
-      {
-        path: "/blogCategories",
-        element: <ListBlogCategory />,
-      },
-      {
-        path: "editblog/:id",
-        element: <EditBlog />,
+        path: "create-roles",
+        element: <CreateRoles />,
       },
     ],
   },
