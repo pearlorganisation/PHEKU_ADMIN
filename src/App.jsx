@@ -10,6 +10,10 @@ import CreateBlogs from "./pages/CreateBlogs/CreateBlogs";
 import CreateBlogCategory from "./pages/CreateBlogCategory/CreateBlogCategory";
 import ListBlogCategory from "./pages/ListBlogCategory/ListBlogCategory";
 import EditBlog from "./pages/EditBlog/EditBlog";
+import CourseSpecialization from "./pages/Course/CourseSpecialization";
+import CourseLevel from "./pages/Course/CourseLevel";
+import CourseSpecializationList from "./pages/Course/CourseSpecializationList";
+import EditCourseSpecialization from "./pages/Course/EditCourseSpecialization";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +59,22 @@ const router = createBrowserRouter([
       {
         path: "editblog/:slug",
         element: <EditBlog />,
+      },
+      {
+        path:"specialization",
+        element:<CourseSpecialization />
+      },
+      {
+        path:"course-level",
+        element: <CourseLevel />
+      },
+      {
+        path:"specialization-list",
+        element: <CourseSpecializationList />
+      },
+      {
+        path: "specialization-list/:id",
+        element: <EditCourseSpecialization />
       },
     ],
   },

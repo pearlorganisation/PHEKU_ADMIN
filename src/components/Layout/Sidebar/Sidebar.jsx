@@ -7,6 +7,8 @@ const Sidebar = () => {
   const [isUsersOpen, setIsUsersOpen] = useState(false);
   const [isBlogsOpen, setIsBlogsOpen] = useState(false);
   const [isRolesOpen, setIsRolesOpen] = useState(false);
+  const [isCourseOpen, setIsCourseOpen] = useState(false);
+
   return (
     <div>
       <aside className="bg-gray-800 text-white w-64 py-8 px-4 fixed top-0 bottom-0 z-10">
@@ -18,7 +20,7 @@ const Sidebar = () => {
           <div className="mb-4">
             <div
               onClick={() => setIsUsersOpen(!isUsersOpen)}
-              className="flex justify-between items-center cursor-pointer hover:text-gray-300"
+              className="flex justify-between items-center cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md"
             >
               <span>User</span>
               {isUsersOpen ? <FaChevronUp /> : <FaChevronDown />}
@@ -26,12 +28,12 @@ const Sidebar = () => {
             {isUsersOpen && (
               <ul className="mt-2 ml-4 space-y-2">
                 <Link to="/create-users">
-                  <li className="hover:text-gray-300 cursor-pointer">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
                     Create User
                   </li>
                 </Link>
                 <Link to="/assign-roles">
-                  <li className="hover:text-gray-300 cursor-pointer">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
                     Assign Roles
                   </li>
                 </Link>
@@ -42,7 +44,7 @@ const Sidebar = () => {
           <div className="mb-4">
             <div
               onClick={() => setIsRolesOpen(!isRolesOpen)}
-              className="flex justify-between items-center cursor-pointer hover:text-gray-300"
+              className="flex justify-between items-center cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md"
             >
               <span>Roles</span>
               {isRolesOpen ? <FaChevronUp /> : <FaChevronDown />}
@@ -50,13 +52,42 @@ const Sidebar = () => {
             {isRolesOpen && (
               <ul className="mt-2 ml-4 space-y-2">
                 <Link to="create-roles">
-                  <li className="hover:text-gray-300 cursor-pointer">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
                     Create Role
                   </li>
                 </Link>
                 <Link to="roles">
-                  <li className="hover:text-gray-300 cursor-pointer">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
                     List Roles
+                  </li>
+                </Link>
+              </ul>
+            )}
+          </div>
+          {/*------------course section---------------*/}
+          <div className="mb-4">
+            <div
+              onClick={() => setIsCourseOpen(!isCourseOpen)}
+              className="flex justify-between items-center cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md"
+            >
+              <span>Course</span>
+              {isCourseOpen ? <FaChevronUp /> : <FaChevronDown />}
+            </div>
+            {isCourseOpen && (
+              <ul className="mt-2 ml-4 space-y-2">
+                <Link to="specialization">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
+                    Create Specialization
+                  </li>
+                </Link>
+                <Link to="course-level">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
+                    Create Course Level
+                  </li>
+                </Link>
+                <Link to="specialization-list">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
+                    Course Specialization List
                   </li>
                 </Link>
               </ul>
