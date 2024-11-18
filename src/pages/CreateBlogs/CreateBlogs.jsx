@@ -19,7 +19,11 @@ const CreateBlogs = () => {
   // 6718c9175a01a0b9e32af082
   const { isLoading, blogCategories } = useSelector((state) => state.blog);
   const { adminInfo } = useSelector((state) => state.auth);
-
+  
+  useEffect(() => {
+    dispatch(getBlogCategories());
+  }, []);
+  
   const {
     register,
     handleSubmit,
@@ -39,9 +43,7 @@ const CreateBlogs = () => {
     },
   });
 
-  useEffect(() => {
-    dispatch(getBlogCategories());
-  }, []);
+ 
 
   console.log(blogCategories, "blog categories recieved");
 
@@ -74,7 +76,7 @@ const CreateBlogs = () => {
 
     const formData = new FormData();
     formData.append("thumbImage", image);
-    formData.append("author", "6719e401c7a21c19aa963877");
+    
 
     dispatch(createBlogs(data)).then((res) => {
       console.log("page 10101", res);
