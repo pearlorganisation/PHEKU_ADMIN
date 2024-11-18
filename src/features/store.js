@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slices/authSlice"
 import blogReducer from "./slices/blogSlice";
 import rolesReducer  from "./slices/roleSlice";
+import courseReducer from "./slices/courseSlice";
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
@@ -26,7 +27,8 @@ const persistConfig = {
 const reducer = combineReducers({
   auth: authReducer,
   blog: blogReducer,
-  role: rolesReducer
+  role: rolesReducer,
+  course: courseReducer
 });
 
 const rootReducer = (state, action) => {

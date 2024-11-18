@@ -19,7 +19,7 @@ export const adminLogin = createAsyncThunk(
 
       console.log(data, "asdasdasdasddasdasdasdasd");
 
-      return data;
+      return data.data;
     } catch (error) {
       console.log("Error", error);
       // return custom error message from API if any
