@@ -12,7 +12,7 @@ export const getUserDetails = createAsyncThunk(
                     "Content-Type": "application/json"
                 }
             }
-            const { data }= await axiosInstance(`/api/v1/users/me`, config);
+            const { data }= await axiosInstance.get(`/api/v1/users/me`, config);
             console.log("logged in user data", data);
             return data.data;
         } catch (error) {
