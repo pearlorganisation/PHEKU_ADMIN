@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBlogs } from "../../features/actions/blogActions";
+import { getUserDetails } from "../../features/actions/userAction.js/userAction";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -9,6 +10,10 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(getBlogs());
   }, []);
+
+  useEffect(()=>{
+    dispatch(getUserDetails());
+  });
 
   console.log(blogs);
   return (

@@ -20,9 +20,7 @@ const CreateBlogs = () => {
   // 6718c9175a01a0b9e32af082
   const { isLoading, blogCategories } = useSelector((state) => state.blog);
   const { adminInfo } = useSelector((state) => state.user);
-  useEffect(()=>{
-    dispatch(getUserDetails())
-  },[])
+ 
 
   
   useEffect(() => {
