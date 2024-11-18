@@ -51,7 +51,7 @@ export const createCourseLevel = createAsyncThunk(
     }
 );
 
-/*--------------------------------to get all the specialization--------------------------------*/
+/*--------------------------------to get all the course specialization--------------------------------*/
 
 export const getAllSpecialization = createAsyncThunk(
     "specialization/getAll",async(_,{ rejectWithValue })=>{
@@ -151,3 +151,6 @@ export const getSingleSpecialization = createAsyncThunk(
             }
         }
     )
+
+    /**-----------------------------action for deleting the course-specialization-----------------------------*/
+    

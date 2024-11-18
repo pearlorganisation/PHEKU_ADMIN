@@ -7,7 +7,6 @@ import { adminLogin } from "../actions/authActions";
 const initialState = {
   isLoading: false,
   isAdminLoggedIn: false,
-  adminInfo: null,
   isError: false,
   message: null,
   isSuccess: false,
@@ -35,7 +34,6 @@ const authSlice = createSlice({
       }),
       builder.addCase(adminLogin.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.adminInfo = action.payload;
         state.isSuccess = true;
         state.isError = false;
         state.isAdminLoggedIn = true;

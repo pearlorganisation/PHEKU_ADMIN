@@ -9,6 +9,7 @@ import {
 import { ToastContainer } from "react-toastify";
 import JoditEditor from "jodit-react";
 import slugify from "slugify";
+import { getUserDetails } from "../../features/actions/userAction.js/userAction";
 
 const CreateBlogs = () => {
   const editorRef = useRef(null);
@@ -18,7 +19,11 @@ const CreateBlogs = () => {
   const [imagePreview, setImagePreview] = useState(null);
   // 6718c9175a01a0b9e32af082
   const { isLoading, blogCategories } = useSelector((state) => state.blog);
-  const { adminInfo } = useSelector((state) => state.auth);
+  const { adminInfo } = useSelector((state) => state.user);
+  useEffect(()=>{
+    dispatch(getUserDetails())
+  },[])
+
   
   useEffect(() => {
     dispatch(getBlogCategories());
