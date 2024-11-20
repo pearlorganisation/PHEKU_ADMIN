@@ -36,7 +36,7 @@ const CreateBlogs = () => {
   } = useForm({
     defaultValues: {
       title: "",
-      author: `${adminInfo?.data?._id}`,
+      author: `${adminInfo?._id}`,
       slug: "",
       category: "",
       content: "",
