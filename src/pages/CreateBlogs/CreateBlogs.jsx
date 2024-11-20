@@ -258,33 +258,6 @@ const CreateBlogs = () => {
             />
           </div>
 
-          {/* Author*/}
-          <div className="mb-6">
-            <label
-              htmlFor="author"
-              className="block mb-2 text-sm font-medium text-gray-700"
-            >
-              Author
-            </label>
-            <input
-              type="text"
-              id="author"
-              disabled={true}
-              {...register("author", { required: "Author is required" })}
-              className={`shadow-sm bg-gray-50 border ${
-                errors.author ? "border-red-500" : "border-gray-300"
-              } 
-                            text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
-                            block w-full p-2.5`}
-              placeholder="Enter Author"
-            />
-            {errors.author && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.author.message}
-              </p>
-            )}
-          </div>
-
           {/* Blog Categories */}
           <div className="mb-6">
             <label htmlFor="category">Blog Category</label>
