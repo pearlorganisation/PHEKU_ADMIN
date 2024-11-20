@@ -14,6 +14,7 @@ import CourseSpecialization from "./pages/Course/CourseSpecialization";
 import CourseLevel from "./pages/Course/CourseLevel";
 import CourseSpecializationList from "./pages/Course/CourseSpecializationList";
 import EditCourseSpecialization from "./pages/Course/EditCourseSpecialization";
+import ViewBlog from "./pages/ViewBlogs/ViewBlogs";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
         element: <ListBlogs />,
       },
       {
+        path: "viewBlog/:id",
+        element: <ViewBlog />,
+      },
+      {
         path: "create-blogs",
         element: <CreateBlogs />,
       },
@@ -62,20 +67,20 @@ const router = createBrowserRouter([
         element: <EditBlog />,
       },
       {
-        path:"specialization",
-        element:<CourseSpecialization />
+        path: "specialization",
+        element: <CourseSpecialization />,
       },
       {
-        path:"course-level",
-        element: <CourseLevel />
+        path: "course-level",
+        element: <CourseLevel />,
       },
       {
-        path:"specialization-list",
-        element: <CourseSpecializationList />
+        path: "specialization-list",
+        element: <CourseSpecializationList />,
       },
       {
         path: "specialization-list/:id",
-        element: <EditCourseSpecialization />
+        element: <EditCourseSpecialization />,
       },
     ],
   },

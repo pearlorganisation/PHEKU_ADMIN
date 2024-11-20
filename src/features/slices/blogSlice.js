@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   createBlogCategory,
   createBlogs,
+  deleteBlog,
   getBlogCategories,
   getBlogs,
   getSingleBlog,
@@ -70,6 +71,25 @@ const blogSlice = createSlice({
         state.singleBlog = action.payload;
       })
       .addCase(updateBlog.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+
+      // delete blog
+
+      .addCase(deleteBlog.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteBlog.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.isDeleted = true;
+        state.singleBlog = action.payload;
+      })
+      .addCase(deleteBlog.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;

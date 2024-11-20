@@ -19,11 +19,11 @@ const CreateBlogs = () => {
   // 6718c9175a01a0b9e32af082
   const { isLoading, blogCategories } = useSelector((state) => state.blog);
   const { adminInfo } = useSelector((state) => state.auth);
-  
+
   useEffect(() => {
-    dispatch(getBlogCategories());
+    dispatch(getBlogCategories({ pagination: false }));
   }, []);
-  
+
   const {
     register,
     handleSubmit,
@@ -42,8 +42,6 @@ const CreateBlogs = () => {
       thumbImage: null,
     },
   });
-
- 
 
   console.log(blogCategories, "blog categories recieved");
 
@@ -76,7 +74,6 @@ const CreateBlogs = () => {
 
     const formData = new FormData();
     formData.append("thumbImage", image);
-    
 
     dispatch(createBlogs(data)).then((res) => {
       console.log("page 10101", res);
@@ -287,76 +284,6 @@ const CreateBlogs = () => {
             )}
           </div>
 
-          {/* Date Field
-                <div className="mb-6">
-                    <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-700">
-                        Date
-                    </label>
-                    <input
-                        type="date"
-                        id="date"
-                        {...register('date', { required: 'Date is required' })}
-                        className={`shadow-sm bg-gray-50 border ${errors.date ? 'border-red-500' : 'border-gray-300'} 
-                            text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
-                            block w-full p-2.5`}
-                    />
-                    {errors.date && <p className="text-red-500 text-sm mt-1">{errors.date.message}</p>}
-                </div> */}
-
-          {/* Tags Section */}
-          {/* <div className="mb-6">
-            <div className="flex flex-col gap-2 text-sm font-medium text-gray-700">
-              <div className="flex items-center mb-2">
-                <span>Tags</span>
-                <button
-                  type="button"
-                  onClick={() => append("")}
-                  className="text-blue-500 hover:text-blue-700"
-                  title="Add Tag"
-                >
-                  <IoIosAdd size={24} />
-                </button>
-              </div>
-
-              {fields.map((item, index) => (
-                <div key={item.id} className="flex items-center mb-2">
-                  <input
-                    {...register(`tags.${index}`, {
-                      required: "Tag is required",
-                    })}
-                    className={`shadow-sm bg-gray-50 border ${
-                      errors.tags?.[index]
-                        ? "border-red-500"
-                        : "border-gray-300"
-                    } text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
-                                    block w-full p-2.5`}
-                    placeholder={`Tag ${index + 1}`}
-                  />
-                  {fields.length > 1 && (
-                    <IoClose
-                      className="text-red-500 ml-2 cursor-pointer"
-                      onClick={() => remove(index)}
-                      size={24}
-                      title="Remove Tag"
-                    />
-                  )}
-                </div>
-              ))} */}
-
-          {/* Display error if any tag is missing */}
-          {/* {errors.tags &&
-                Array.isArray(errors.tags) &&
-                errors.tags.map(
-                  (tagError, index) =>
-                    tagError && (
-                      <p key={index} className="text-red-500 text-sm mt-1">
-                        Tag {index + 1} is required.
-                      </p>
-                    )
-                )}
-            </div>
-          </div> */}
-
           {/* Blog Categories */}
           <div className="mb-6">
             <label htmlFor="category">Blog Category</label>
@@ -406,7 +333,7 @@ const CreateBlogs = () => {
                 type="submit"
                 className=" bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition-colors"
               >
-                ......loading
+                Please Wait ...
               </button>
             </>
           ) : (
