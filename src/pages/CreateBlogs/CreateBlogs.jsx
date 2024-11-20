@@ -9,16 +9,24 @@ import {
 import { ToastContainer } from "react-toastify";
 import JoditEditor from "jodit-react";
 import slugify from "slugify";
+import { getUserDetails } from "../../features/actions/userAction.js/userAction";
 
 const CreateBlogs = () => {
   const editorRef = useRef(null);
 
   const dispatch = useDispatch();
-
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-
+  // 6718c9175a01a0b9e32af082
   const { isLoading, blogCategories } = useSelector((state) => state.blog);
+  const { adminInfo } = useSelector((state) => state.user);
+ 
+
+  
+  useEffect(() => {
+    dispatch(getBlogCategories());
+  }, []);
+  
   const {
     register,
     handleSubmit,
@@ -30,7 +38,7 @@ const CreateBlogs = () => {
   } = useForm({
     defaultValues: {
       title: "",
-      author: "6719e401c7a21c19aa963877",
+      author: `${adminInfo?._id}`,
       slug: "",
       category: "",
       content: "",
@@ -38,9 +46,7 @@ const CreateBlogs = () => {
     },
   });
 
-  useEffect(() => {
-    dispatch(getBlogCategories());
-  }, []);
+ 
 
   console.log(blogCategories, "blog categories recieved");
 
@@ -73,7 +79,7 @@ const CreateBlogs = () => {
 
     const formData = new FormData();
     formData.append("thumbImage", image);
-    formData.append("author", "6719e401c7a21c19aa963877");
+    
 
     dispatch(createBlogs(data)).then((res) => {
       console.log("page 10101", res);
@@ -268,13 +274,14 @@ const CreateBlogs = () => {
             <input
               type="text"
               id="author"
+              disabled={true}
               {...register("author", { required: "Author is required" })}
               className={`shadow-sm bg-gray-50 border ${
                 errors.author ? "border-red-500" : "border-gray-300"
               } 
                             text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
                             block w-full p-2.5`}
-              placeholder="Enter blog title"
+              placeholder="Enter Author"
             />
             {errors.author && (
               <p className="text-red-500 text-sm mt-1">

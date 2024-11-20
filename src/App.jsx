@@ -3,13 +3,17 @@ import LayoutComponent from "./components/Layout/LayoutComponent";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import CreateRoles from "./pages/Roles/CreateRoles/CreateRoles";
 import ListRoles from "./pages/Roles/ListRoles/ListRoles";
+import EditRole from "./pages/EditRole/EditRole";
+import Login from "./pages/Login/Login";
 import ListBlogs from "./pages/ListBlogs/ListBlogs";
 import CreateBlogs from "./pages/CreateBlogs/CreateBlogs";
 import CreateBlogCategory from "./pages/CreateBlogCategory/CreateBlogCategory";
 import ListBlogCategory from "./pages/ListBlogCategory/ListBlogCategory";
 import EditBlog from "./pages/EditBlog/EditBlog";
-import EditRole from "./pages/EditRole/EditRole";
-import Login from "./pages/Login/Login";
+import CourseSpecialization from "./pages/Course/CourseSpecialization";
+import CourseLevel from "./pages/Course/CourseLevel";
+import CourseSpecializationList from "./pages/Course/CourseSpecializationList";
+import EditCourseSpecialization from "./pages/Course/EditCourseSpecialization";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +39,6 @@ const router = createBrowserRouter([
       {
         path: "create-roles",
         element: <CreateRoles />,
-      
       },
     
       {
@@ -58,26 +61,21 @@ const router = createBrowserRouter([
         path: "editblog/:slug",
         element: <EditBlog />,
       },
-
       {
-        path: "blogs",
-        element: <ListBlogs />,
+        path:"specialization",
+        element:<CourseSpecialization />
       },
       {
-        path: "create-blogs",
-        element: <CreateBlogs />,
+        path:"course-level",
+        element: <CourseLevel />
       },
       {
-        path: "create-blogCat",
-        element: <CreateBlogCategory />,
+        path:"specialization-list",
+        element: <CourseSpecializationList />
       },
       {
-        path: "blogCategories",
-        element: <ListBlogCategory />,
-      },
-      {
-        path: "editblog/:slug",
-        element: <EditBlog />,
+        path: "specialization-list/:id",
+        element: <EditCourseSpecialization />
       },
     ],
   },

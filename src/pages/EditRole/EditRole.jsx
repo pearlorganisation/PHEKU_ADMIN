@@ -6,6 +6,7 @@ import { getRoleById, updateById } from '../../features/actions/rolesActions';
 const EditRole = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
+    
     const [formData, setFormData] = useState({
         roleName: '',
         description: ''
