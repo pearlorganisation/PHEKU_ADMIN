@@ -4,7 +4,6 @@ import { deleteRole, getRoles } from "../../../features/actions/rolesActions";
 import { Link } from "react-router-dom";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import ConfirmDeleteModal from "../../../components/ConfirmModal/ConfirmDeleteModal";
-import { NavLink } from "react-router-dom";
 
 const ListRoles = () => {
   const dispatch = useDispatch();

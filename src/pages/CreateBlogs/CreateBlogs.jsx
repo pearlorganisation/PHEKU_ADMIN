@@ -16,9 +16,11 @@ const CreateBlogs = () => {
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  // 6718c9175a01a0b9e32af082
+
   const { isLoading, blogCategories } = useSelector((state) => state.blog);
   const { adminInfo } = useSelector((state) => state.auth);
+
+  console.log(adminInfo, "info about admin");
 
   useEffect(() => {
     dispatch(getBlogCategories({ pagination: false }));
@@ -35,7 +37,7 @@ const CreateBlogs = () => {
   } = useForm({
     defaultValues: {
       title: "",
-      author: `${adminInfo?._id}`,
+      author: `${adminInfo?.data?._id}`,
       slug: "",
       category: "",
       content: "",

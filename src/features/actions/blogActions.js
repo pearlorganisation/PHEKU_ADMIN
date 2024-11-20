@@ -120,3 +120,49 @@ export const getBlogCategories = createAsyncThunk(
     }
   }
 );
+
+export const getSingleBlogCategory = createAsyncThunk(
+  "blog/getSingleBlogCategory",
+  async (id, thunkAPI) => {
+    try {
+      const { data } = await axiosInstance.get(
+        `/api/v1/blogs/categories/${id}`
+      );
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteBlogCategory = createAsyncThunk(
+  "blogCategory/delete",
+  async (id, thunkAPI) => {
+    try {
+      const { data } = await axiosInstance.delete(
+        `/api/v1/blogs/categories/${id}`
+      );
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const updateBlogCategory = createAsyncThunk(
+  "blogCategory/put",
+  async ({ id, data }, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.put(
+        `/api/v1/blogs/categories/${id}`,
+        data
+      );
+      console.log(response, "response");
+      return response?.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);

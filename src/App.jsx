@@ -15,6 +15,7 @@ import CourseLevel from "./pages/Course/CourseLevel";
 import CourseSpecializationList from "./pages/Course/CourseSpecializationList";
 import EditCourseSpecialization from "./pages/Course/EditCourseSpecialization";
 import ViewBlog from "./pages/ViewBlogs/ViewBlogs";
+import EditBlogCategory from "./pages/EditBlogCategory/EditBlogCategory";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "blogCategories",
         element: <ListBlogCategory />,
+      },
+      {
+        path: "blogCategories/:id",
+        element: <EditBlogCategory />,
       },
       {
         path: "editblog/:slug",

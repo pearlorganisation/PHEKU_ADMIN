@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBlogCategories } from "../../features/actions/blogActions";
-import { Link } from "react-router-dom";
+import {
+  deleteBlogCategory,
+  getBlogCategories,
+} from "../../features/actions/blogActions";
 import Pagination from "../../components/Pagination/Pagination";
+import { Link } from "react-router-dom";
+import ConfirmDeleteModal from "../../components/ConfirmModal/ConfirmDeleteModal";
 
 const ListBlogCategory = () => {
   const { blogCategories, blogsCatPaginate } = useSelector(
@@ -27,6 +31,19 @@ const ListBlogCategory = () => {
     dispatch(getBlogCategories({ page: currentPage, pagination: true }));
   }, [dispatch, currentPage]);
 
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedBlogCategoryId, setSelectedBlogCategoryId] = useState(null);
+
+  const handleDelete = (blogCatId) => {
+    setSelectedBlogCategoryId(blogCatId);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = () => {
+    dispatch(deleteBlogCategory(selectedBlogCategoryId));
+    dispatch(getBlogCategories({ page: currentPage, pagination: true }));
+    setShowDeleteModal(false);
+  };
   return (
     <div className="ml-52 mt-20">
       <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
@@ -248,21 +265,21 @@ const ListBlogCategory = () => {
                           <div className=" bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                             <ul className="py-1 text-sm text-gray-700 dark:text-gray-200 flex flex-row gap-3 mt-5">
                               <li>
-                                <a
-                                  href="#"
+                                <Link
+                                  to={`${blog._id}`}
                                   className="block py-2 px-4 bg-blue-500  rounded-md"
                                 >
                                   Edit
-                                </a>
+                                </Link>
                               </li>
 
                               <li>
-                                <a
-                                  href="#"
+                                <button
+                                  onClick={() => handleDelete(blog._id)}
                                   className="block py-2 px-4 text-sm bg-red-500 text-gray-700  rounded-md"
                                 >
                                   Delete
-                                </a>
+                                </button>
                               </li>
                             </ul>
                           </div>
@@ -271,6 +288,14 @@ const ListBlogCategory = () => {
                     ))}
                 </tbody>
               </table>
+
+              {/* Delete Confirmation Modal */}
+              {showDeleteModal && (
+                <ConfirmDeleteModal
+                  confirmDelete={confirmDelete}
+                  setShowDeleteModal={setShowDeleteModal}
+                />
+              )}
             </div>
 
             <Pagination

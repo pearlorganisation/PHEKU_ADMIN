@@ -59,16 +59,18 @@ const ViewBlog = () => {
         <div className="text-lg">
           <p>
             Email:{" "}
-            <span className="font-semibold">{singleBlog?.author.email}</span>
+            <span className="font-semibold">{singleBlog?.author?.email}</span>
           </p>
           <p>
             Full Name:{" "}
-            <span className="font-semibold">{singleBlog?.author.fullName}</span>
+            <span className="font-semibold">
+              {singleBlog?.author?.fullName}
+            </span>
           </p>
           <p>
             Role:{" "}
             <span className="font-semibold text-green-600">
-              {singleBlog?.author.role}
+              {singleBlog?.author?.role}
             </span>
           </p>
         </div>
