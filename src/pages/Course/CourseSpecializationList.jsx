@@ -3,7 +3,7 @@ import ConfirmDeleteModal from '../../components/ConfirmModal/ConfirmDeleteModal
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RiDeleteBin6Line } from 'react-icons/ri';
-import { getAllSpecialization } from '../../features/actions/courseAction';
+import { deleteSpecialization, getAllSpecialization } from '../../features/actions/courseAction';
 
 const CourseSpecializationList = () => {
     const dispatch = useDispatch();
@@ -18,13 +18,17 @@ const CourseSpecializationList = () => {
     },[])
 
     const handleDelete = (id) => {
-         setSelectedSpecializationId(roleId);
+        console.log('----------id on main', id)
+         setSelectedSpecializationId(id);
          setShowDeleteModal(true);
     };
 
     const confirmDelete = () => {
-        // dispatch(deleteRole(selectedRoleId));
+
+        dispatch(deleteSpecialization({id:selectedSpecializationId})); // dispatching to delete the specialization 
+        dispatch(getAllSpecialization())
         setShowDeleteModal(false);
+
         // reloadiingn the page
         // window.location.reload(true);
     };
@@ -56,7 +60,7 @@ const CourseSpecializationList = () => {
                   </Link>
               </div>
               <table className="w-full text-sm text-left text-gray-500">
-                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+                  <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                       <tr>
                           <th className="px-6 py-3">Course Specialization Name</th>
                           <th className="px-6 py-3">Action</th>

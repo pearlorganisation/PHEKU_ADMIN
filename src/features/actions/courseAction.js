@@ -153,4 +153,23 @@ export const getSingleSpecialization = createAsyncThunk(
     )
 
     /**-----------------------------action for deleting the course-specialization-----------------------------*/
-    
+    export const deleteSpecialization = createAsyncThunk(
+        "specialization/delete",async({id},{rejectWithValue})=>{
+            console.log('-----------id', id)
+            try {
+                const config = {
+                    headers:{
+                        "Content-Type":"application/json"
+                    }
+                }
+                const { data } = await axiosInstance.delete(`/api/v1/specializations/${id}`,config);
+                return data.data;
+            } catch (error) {
+                if (error.response && error.response.data.message) {
+                    return rejectWithValue(error.response.data.message);
+                } else {
+                    return rejectWithValue(error.message);
+                }
+            }
+        }
+    )

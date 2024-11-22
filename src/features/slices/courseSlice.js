@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { createCourseLevel, createSpecialization, getAllSpecialization, getSingleSpecialization, updateSpecialization } from "../actions/courseAction"
+import { createCourseLevel, createSpecialization, deleteSpecialization, getAllSpecialization, getSingleSpecialization, updateSpecialization } from "../actions/courseAction"
 import { toast } from "sonner"
 
 const initialState ={
@@ -104,6 +104,21 @@ const courseSlice = createSlice({
          toast.success("Updated the Specialization", {
              position: "top-right"
          })
+    })
+    .addCase(deleteSpecialization.pending,(state)=>{
+        state.isLoading = true;
+    })
+    .addCase(deleteSpecialization.rejected,(state,action)=>{
+        state.isLoading= false;
+        state.isError= true;
+        state.isSuccess = false
+        toast.error(action.payload,{position:"top-right"})
+    })
+    .addCase(deleteSpecialization.fulfilled,(state,action)=>{
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        toast.success("Deleted the Course Specialization",{position:"top-right"})
     })
   }
 })
