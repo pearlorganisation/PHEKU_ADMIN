@@ -80,7 +80,7 @@ export const getAllSpecialization = createAsyncThunk(
 /**---------------------------------To get all the course Level-------------------------------------------------- */
 
 export const getAllCourse = createAsyncThunk(
-    "specialization/getAll", async (_, {
+    "specialization/getAllCourseLevel", async (_, {
         rejectWithValue
     }) => {
         try {
@@ -93,7 +93,7 @@ export const getAllCourse = createAsyncThunk(
             const {
                 data
             } = await axiosInstance.get(`/api/v1/course-levels`, config)
-            console.log("The data specialization data", data);
+            console.log("course level data----------------------", data);
             return data.data;
         } catch (error) {
             if (error.response && error.response.data.message) {
@@ -104,6 +104,29 @@ export const getAllCourse = createAsyncThunk(
         }
     }
 )
+/**---------------------------delete a course Level---------------- */
+
+export const deleteCourseLevel = createAsyncThunk(
+    "course/courseLevelDelete", async(id,{rejectWithValue})=>{
+        try {
+            const config ={
+                headers:{
+                    "Content-Type": "application/json"
+                }
+            }
+        const { data } = await axiosInstance.delete(`/api/v1/course-levels/${id}`,config)
+        return data
+        } catch (error) {
+         if (error.response && error.response.data.message) {
+             return rejectWithValue(error.response.data.message);
+         } else {
+             return rejectWithValue(error.message);
+         }
+        }
+    }
+)
+
+
 
 /**-----------------get specialization by id--------------------------*/
 

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getSingleSpecialization, updateSpecialization } from '../../features/actions/courseAction';
 
 const EditCourseSpecialization = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const { id } = useParams();
     const { singleSpecialization } = useSelector((state) => state.course);
 
@@ -19,6 +20,9 @@ const EditCourseSpecialization = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(updateSpecialization({ id, name }));
+        setTimeout(()=>{
+            navigate("/specialization-list")
+        },200)
     };
 
     // Fetch specialization details on mount

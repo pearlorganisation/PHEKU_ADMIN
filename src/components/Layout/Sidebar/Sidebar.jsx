@@ -85,6 +85,11 @@ const Sidebar = () => {
                     Create Course Level
                   </li>
                 </Link>
+                <Link to="course-level-list">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
+                    Course Level List
+                  </li>
+                </Link>
                 <Link to="specialization-list">
                   <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
                     Course Specialization List

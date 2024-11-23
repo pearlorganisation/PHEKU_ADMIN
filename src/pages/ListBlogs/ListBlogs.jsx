@@ -307,7 +307,7 @@ const ListBlogs = () => {
                                   className=" rounded-md bg-green-500 px-4 py-2 hover:text-blue-600 text-center"
                                   onClick={(e) => {
                                     e.preventDefault();
-                                    navigate(`/dashboard/viewBlog/${blog._id}`);
+                                    navigate(`/viewBlog/${blog._id}`);
                                   }}
                                 >
                                   View

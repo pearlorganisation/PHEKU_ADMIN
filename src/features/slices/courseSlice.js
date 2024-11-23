@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { createCourseLevel, createSpecialization, deleteSpecialization, getAllSpecialization, getSingleSpecialization, updateSpecialization } from "../actions/courseAction"
+import { createCourseLevel, createSpecialization, deleteCourseLevel, deleteSpecialization, getAllCourse, getAllSpecialization, getSingleSpecialization, updateSpecialization } from "../actions/courseAction"
 import { toast } from "sonner"
 
 const initialState ={
@@ -8,7 +8,7 @@ const initialState ={
     isLoading: false,
     courseSpecialization:{}, // for all the specialization
     singleSpecialization:{}, // for single specialization
-    courseLevel:{}, // for all the course level
+    courseLevelInfo:{}, // for all the course level
     courseLevelState:{
      isSuccess: false,
      isError: false,
@@ -119,6 +119,40 @@ const courseSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         toast.success("Deleted the Course Specialization",{position:"top-right"})
+    })
+    .addCase(getAllCourse.pending,(state)=>{
+        state.isLoading = true
+    })
+    .addCase(getAllCourse.rejected,(state,action)=>{
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false
+        toast.error(action.payload);
+    })
+    .addCase(getAllCourse.fulfilled,(state,action)=>{
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.courseLevelInfo = action.payload
+        toast.success("Retrieved all the course levels",{position:"top-right"})
+    })
+    .addCase(deleteCourseLevel.pending,(state)=>{
+        state.courseLevelState = state.courseLevelState ?? {}
+        state.courseLevelState.isLoading = true;
+    })
+    .addCase(deleteCourseLevel.rejected,(state,action)=>{
+        state.courseLevelState = state.courseLevelState ?? {}
+        state.courseLevelState.isError = true;
+        state.courseLevelState.isLoading = false;
+        state.courseLevelState.isSuccess= false;
+        toast.error(action.payload,{position:"top-right"})
+    })
+    .addCase(deleteCourseLevel.fulfilled,(state,action)=>{
+        state.courseLevelState = state.courseLevelState ?? {}
+        state.courseLevelState.isLoading = false;
+        state.courseLevelState.isError= false;
+        state.courseLevelState.isSuccess = true;
+        toast.success("Successfully Deleted",{position:"top-right"})
     })
   }
 })

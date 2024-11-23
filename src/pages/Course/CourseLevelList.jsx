@@ -1,49 +1,35 @@
 import React, { useEffect, useState } from 'react'
-import ConfirmDeleteModal from '../../components/ConfirmModal/ConfirmDeleteModal'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteCourseLevel, getAllCourse } from '../../features/actions/courseAction';
 import { Link } from 'react-router-dom';
 import { RiDeleteBin6Line } from 'react-icons/ri';
-import { deleteSpecialization, getAllSpecialization } from '../../features/actions/courseAction';
-
-const CourseSpecializationList = () => {
-    const dispatch = useDispatch();
-
+import ConfirmDeleteModal from '../../components/ConfirmModal/ConfirmDeleteModal';
+const CourseLevelList = () => {
+   const dispatch = useDispatch();
+    const { courseLevelInfo } = useSelector((state)=>state.course);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [selectedSpecializationId, setSelectedSpecializationId] = useState(null);
-
-    const { courseSpecialization, isError, isLoading } = useSelector((state)=> state.course); 
+    const [selectedCourseLevelId, setSelectedCourseLevelId] = useState(null);
     
-    useEffect(()=>{
-        dispatch(getAllSpecialization())
-    },[])
-
-    const handleDelete = (id) => {
-        console.log('----------id on main', id)
-         setSelectedSpecializationId(id);
-         setShowDeleteModal(true);
-    };
-
-    const confirmDelete = () => {
-
-        dispatch(deleteSpecialization({id:selectedSpecializationId})); // dispatching to delete the specialization 
-        dispatch(getAllSpecialization())
-        setShowDeleteModal(false);
-
-        // reloadiingn the page
-        // window.location.reload(true);
-    };
-
-    if (isLoading) {
-        return <div>Loading...</div>;
+    useEffect(() => {
+        dispatch(getAllCourse());
+    }, [dispatch]);
+    
+    const handleDelete =(id)=>{
+        setSelectedCourseLevelId(id)
+        setShowDeleteModal(true)
     }
 
-    if (isError) {
-        return <div>Error: {isError}</div>;
+    const confirmDelete =()=>{
+      dispatch(deleteCourseLevel(selectedCourseLevelId));
+      dispatch(getAllCourse())
+      setShowDeleteModal(false)
     }
+    
+ 
   return (
       <main className="flex-1 p-8 mt-16 ml-64">
           <div className="text-4xl font-bold mb-6 flex justify-between items-center">
-              <div>Specialization Management</div>
+              <div>Course Level Management</div>
           </div>
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
               <div className="pb-4 bg-white dark:bg-gray-900 flex justify-end">
@@ -53,34 +39,34 @@ const CourseSpecializationList = () => {
                       className="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50"
                       placeholder="Search for items"
                   /> */}
-                  <Link to="/specialization" relative="path">
+                  <Link to="/course-level" relative="path">
                       <span className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 font-medium rounded-lg text-sm px-4 py-2">
-                          Create Specialization
+                          Create Course Level
                       </span>
                   </Link>
               </div>
               <table className="w-full text-sm text-left text-gray-500">
                   <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                       <tr>
-                          <th className="px-6 py-3">Course Specialization Name</th>
+                          <th className="px-6 py-3">Course Level Name</th>
                           <th className="px-6 py-3">Action</th>
                       </tr>
                   </thead>
                   <tbody>
-                      {Array.isArray(courseSpecialization) &&
-                          courseSpecialization?.map((specialization, index) => (
+                      {Array.isArray(courseLevelInfo) &&
+                          courseLevelInfo?.map((course, index) => (
                               <tr key={index} className="bg-white border-b hover:bg-gray-50">
                                   <th className="px-6 py-4 font-medium text-gray-900">
-                                      {specialization?.name || "N/A"}
+                                      {course?.level || "N/A"}
                                   </th>
                                   <td className="px-6 py-4 flex gap-2">
                                       <Link
-                                          to={`${specialization?._id}`}
+                                          to={`${course?._id}`}
                                           className="font-medium text-blue-600 hover:underline"
                                       >
                                           Edit
                                       </Link>
-                                      <button onClick={() => handleDelete(specialization?._id)}>
+                                      <button onClick={() => handleDelete(course?._id)}>
                                           <RiDeleteBin6Line size={20} color="red" />
                                       </button>
                                   </td>
@@ -101,4 +87,4 @@ const CourseSpecializationList = () => {
   )
 }
 
-export default CourseSpecializationList
+export default CourseLevelList
