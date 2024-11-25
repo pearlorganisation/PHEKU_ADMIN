@@ -18,6 +18,7 @@ import ViewBlog from "./pages/ViewBlogs/ViewBlogs";
 import EditBlogCategory from "./pages/EditBlogCategory/EditBlogCategory";
 import { useSelector } from "react-redux";
 import CourseLevelList from "./pages/Course/CourseLevelList";
+import AddCourse from "./pages/Course/AddCourse/AddCourse";
 
 const AppRoutes =()=>{
   const { isAdminLoggedIn } = useSelector((state)=>state.auth);
@@ -91,6 +92,10 @@ const AppRoutes =()=>{
         {
           path:"course-level-list",
           element:<CourseLevelList />
+        },
+        { 
+          path:"add-course",
+          element: <AddCourse />
         }
       ]:[],
     },

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { createCourseLevel, createSpecialization, deleteCourseLevel, deleteSpecialization, getAllCourse, getAllSpecialization, getSingleSpecialization, updateSpecialization } from "../actions/courseAction"
+import { addCourse, createCourseLevel, createSpecialization, deleteCourseLevel, deleteSpecialization, getAllCourse, getAllSpecialization, getSingleSpecialization, updateSpecialization } from "../actions/courseAction"
 import { toast } from "sonner"
 
 const initialState ={
@@ -13,6 +13,11 @@ const initialState ={
      isSuccess: false,
      isError: false,
      isLoading: false,
+    },
+    createCourse:{   // for tracking the creation of a course
+        isSuccess: false,
+        isError: false,
+        isLoading: false,
     }
 }
 
@@ -153,6 +158,24 @@ const courseSlice = createSlice({
         state.courseLevelState.isError= false;
         state.courseLevelState.isSuccess = true;
         toast.success("Successfully Deleted",{position:"top-right"})
+    })/*---------------------------for adding a course-----------------------------*/
+    .addCase(addCourse.pending,(state)=>{
+        state.createCourse = state.createCourse ?? {};
+        state.createCourse.isLoading = true;
+    })
+    .addCase(addCourse.fulfilled,(state)=>{
+        state.createCourse = state.createCourse ?? {};
+        state.createCourse.isLoading = false;
+        state.createCourse.isError = false;
+        state.createCourse.isSuccess = true;
+        toast.success("Course created successfully",{position:"top-right"}) 
+    })
+    .addCase(addCourse.rejected,(state,action)=>{
+        state.createCourse = state.createCourse ?? {};
+        state.createCourse.isLoading = false;
+        state.createCourse.isError = true;
+        state.createCourse.isSuccess= false;
+        toast.error(action.payload,{position:"top-right"})
     })
   }
 })
