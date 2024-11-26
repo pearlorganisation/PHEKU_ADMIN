@@ -19,6 +19,8 @@ import EditBlogCategory from "./pages/EditBlogCategory/EditBlogCategory";
 import { useSelector } from "react-redux";
 import CourseLevelList from "./pages/Course/CourseLevelList";
 import AddCourse from "./pages/Course/AddCourse/AddCourse";
+import ListUniversities from "./pages/Universities/ListUniversities";
+import CreateUniversity from "./pages/Universities/CreateUniversity";
 
 const AppRoutes =()=>{
   const { isAdminLoggedIn } = useSelector((state)=>state.auth);
@@ -96,6 +98,14 @@ const AppRoutes =()=>{
         { 
           path:"add-course",
           element: <AddCourse />
+        },
+        {
+          path:"get-all-universities",
+          element:<ListUniversities />
+        },
+        {
+          path:"create-university",
+          element:<CreateUniversity />
         }
       ]:[],
     },
