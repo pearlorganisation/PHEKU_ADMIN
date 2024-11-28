@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBlogs } from "../../features/actions/blogActions";
+import { deleteBlog, getBlogs } from "../../features/actions/blogActions";
 import moment from "moment";
-import { Link } from "react-router-dom";
-import ViewModal from "../../components/ViewModal/ViewModal";
+import { Link, useNavigate } from "react-router-dom";
 import Pagination from "../../components/Pagination/Pagination";
+import ConfirmDeleteModal from "../../components/ConfirmModal/ConfirmDeleteModal";
 
 const ListBlogs = () => {
   const dispatch = useDispatch();
   const { blogs, paginate } = useSelector((state) => state.blog);
+
+  const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -21,20 +23,36 @@ const ListBlogs = () => {
     }
   };
 
-  console.log(currentPage, "current new page MDX");
-
   useEffect(() => {
     dispatch(getBlogs({ page: currentPage }));
   }, [dispatch, currentPage]);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedBlogId, setSelectedBlogId] = useState(null);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const handleDelete = (roleId) => {
+    setSelectedBlogId(roleId);
+    setShowDeleteModal(true);
+  };
 
-  const [blog, setBlog] = useState(null);
+  const confirmDelete = () => {
+    dispatch(deleteBlog(selectedBlogId));
 
-  console.log(paginate, "my paginate data");
+    // if (Array.isArray(blogs) && blogs.length > 0)
+    //   dispatch(getBlogs({ page: currentPage }));
+
+    if (Array.isArray(blogs) && blogs.length === 1 && currentPage > 1) {
+      dispatch(getBlogs({ page: currentPage - 1 }));
+    } else if (Array.isArray(blogs) && blogs.length === 1 && currentPage == 1) {
+      dispatch(getBlogs());
+    } else if (Array.isArray(blogs)) {
+      dispatch(getBlogs({ page: currentPage }));
+    }
+
+    setShowDeleteModal(false);
+    // reloadiingn the page
+    // window.location.reload(true);
+  };
 
   return (
     <div className="ml-52 mt-20">
@@ -247,92 +265,102 @@ const ListBlogs = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {Array.isArray(blogs) &&
-                    blogs?.map((blog, index) => (
-                      <tr
-                        key={blog._id}
-                        className="border-b dark:border-gray-700"
-                      >
-                        <td className="px-4 py-3">
-                          {paginate?.limit * (currentPage - 1) + index + 1}
-                        </td>
-                        <th
-                          scope="row"
-                          className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  {blogs?.length > 0 && Array.isArray(blogs) ? (
+                    <>
+                      {blogs?.map((blog, index) => (
+                        <tr
+                          key={blog._id}
+                          className="border-b dark:border-gray-700"
                         >
-                          <img
-                            src={
-                              blog.thumbImage.secure_url
-                                ? blog.thumbImage.secure_url
-                                : "https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
-                            }
-                            // src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
-                            alt={blog.title}
-                            className="w-20 h-20 mr-3"
-                          />
-                        </th>
-                        <td className="px-4 py-3">{blog.title}</td>
-                        <td className="px-2 py-3">{blog?.author?.fullName}</td>
-                        <td className="px-2 py-3">
-                          {blog.category.blogCategoryName}
-                        </td>
-                        <td className="px-2 py-3">
-                          {moment(blog.publishedAt).format("D MMM YYYY")}
-                        </td>
-                        <td className="px-4 py-3 flex items-center justify-end">
-                          <div className=" bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200 flex flex-row gap-3 mt-5">
-                              <button
-                                className=" rounded-md bg-green-500 px-4 py-2 hover:text-blue-600 text-center"
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  openModal();
-                                  setBlog(blog);
-                                }}
-                              >
-                                View
-                              </button>
-                              <li>
-                                <a
-                                  href={`editblog/${blog.slug}`}
-                                  className="block py-2 px-4 bg-blue-500  rounded-md"
+                          <td className="px-4 py-3">
+                            {paginate?.limit * (currentPage - 1) + index + 1}
+                          </td>
+                          <th
+                            scope="row"
+                            className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                          >
+                            <img
+                              src={
+                                blog.thumbImage.secure_url
+                                  ? blog.thumbImage.secure_url
+                                  : "https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
+                              }
+                              // src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
+                              alt={blog.title}
+                              className="w-20 h-20 mr-3"
+                            />
+                          </th>
+                          <td className="px-4 py-3">{blog.title}</td>
+                          <td className="px-2 py-3">
+                            {blog?.author?.fullName}
+                          </td>
+                          <td className="px-2 py-3">
+                            {blog.category.blogCategoryName}
+                          </td>
+                          <td className="px-2 py-3">
+                            {moment(blog.publishedAt).format("D MMM YYYY")}
+                          </td>
+                          <td className="px-4 py-3 flex items-center justify-end">
+                            <div className=" bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                              <ul className="py-1 text-sm text-gray-700 dark:text-gray-200 flex flex-row gap-3 mt-5">
+                                <button
+                                  className=" rounded-md bg-green-500 px-4 py-2 hover:text-blue-600 text-center"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    navigate(`/viewBlog/${blog._id}`);
+                                  }}
                                 >
-                                  Edit
-                                </a>
-                              </li>
+                                  View
+                                </button>
+                                <li>
+                                  <a
+                                    href={`editblog/${blog.slug}`}
+                                    className="block py-2 px-4 bg-blue-500  rounded-md"
+                                  >
+                                    Edit
+                                  </a>
+                                </li>
 
-                              <li>
-                                <a
-                                  href="#"
-                                  className="block py-2 px-4 text-sm bg-red-500 text-gray-700  rounded-md"
-                                >
-                                  Delete
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
+                                <li>
+                                  <button
+                                    onClick={() => handleDelete(blog._id)}
+                                    className="block py-2 px-4 text-sm bg-red-500 text-gray-700  rounded-md"
+                                  >
+                                    Delete
+                                  </button>
+                                </li>
+                              </ul>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </>
+                  ) : (
+                    <h1 className="pt-4 text-4xl"> No Blogs Found</h1>
+                  )}
                 </tbody>
               </table>
+
+              {/* Delete Confirmation Modal */}
+              {showDeleteModal && (
+                <ConfirmDeleteModal
+                  confirmDelete={confirmDelete}
+                  setShowDeleteModal={setShowDeleteModal}
+                />
+              )}
             </div>
           </div>
 
-          <Pagination
-            paginate={paginate}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            handlePageClick={handlePageClick}
-          />
+          {blogs?.length > 0 && Array.isArray(blogs) && (
+            <Pagination
+              paginate={paginate}
+              currentPage={currentPage}
+              totalPages={totalPages}
+              handlePageClick={handlePageClick}
+            />
+          )}
         </div>
       </section>
-
-      {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50 p-4">
-          <ViewModal data={blog} isOpen={isModalOpen} onClose={closeModal} />
-        </div>
-      )}
     </div>
   );
 };

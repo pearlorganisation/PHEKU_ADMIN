@@ -4,7 +4,6 @@ import { deleteRole, getRoles } from "../../../features/actions/rolesActions";
 import { Link } from "react-router-dom";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import ConfirmDeleteModal from "../../../components/ConfirmModal/ConfirmDeleteModal";
-import { NavLink } from "react-router-dom";
 
 const ListRoles = () => {
   const dispatch = useDispatch();
@@ -51,7 +50,7 @@ const ListRoles = () => {
             className="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50"
             placeholder="Search for items"
           />
-          <Link to="/dashboard/create-roles" relative="path">
+          <Link to="/create-roles" relative="path">
             <span className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 font-medium rounded-lg text-sm px-4 py-2">
               Add Role
             </span>

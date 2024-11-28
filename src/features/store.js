@@ -4,6 +4,7 @@ import blogReducer from "./slices/blogSlice";
 import rolesReducer  from "./slices/roleSlice";
 import courseReducer from "./slices/courseSlice";
 import userReducer from "./slices/userSlice/userSlice"
+import universityReducer from "./slices/universitySlice"
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
@@ -30,7 +31,8 @@ const reducer = combineReducers({
   blog: blogReducer,
   role: rolesReducer,
   course: courseReducer,
-  user: userReducer
+  user: userReducer,
+  universities: universityReducer
 });
 
 const rootReducer = (state, action) => {

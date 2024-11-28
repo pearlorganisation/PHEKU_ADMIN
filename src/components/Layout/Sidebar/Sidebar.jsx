@@ -8,6 +8,7 @@ const Sidebar = () => {
   const [isBlogsOpen, setIsBlogsOpen] = useState(false);
   const [isRolesOpen, setIsRolesOpen] = useState(false);
   const [isCourseOpen, setIsCourseOpen] = useState(false);
+  const [isUniversityOpen, setIsUniversityOpen] = useState(false);
 
   return (
     <div>
@@ -87,9 +88,21 @@ const Sidebar = () => {
                     Create Course Level
                   </li>
                 </Link>
+                <Link to="course-level-list">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
+                    Course Level List
+                  </li>
+                </Link>
                 <Link to="specialization-list">
                   <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
                     Course Specialization List
+                  </li>
+                </Link>
+
+                {/*-----------------add course--------------------*/}
+                <Link to="add-course">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
+                    Add Course
                   </li>
                 </Link>
               </ul>
@@ -133,6 +146,32 @@ const Sidebar = () => {
                     <div className="flex flex-row gap-3 items-center justify-start">
                       <RiUpload2Fill /> <span> List Blogs </span>
                     </div>
+                  </li>
+                </Link>
+              </ul>
+            )}
+          </div>
+
+          {/** Universities Section */}
+          <div className="mb-4">
+            <div
+              onClick={() => setIsUniversityOpen(!isUniversityOpen)}
+              className="flex justify-between items-center cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md"
+            >
+              <span>Universities</span>
+              {isUniversityOpen ? <FaChevronUp /> : <FaChevronDown />}
+            </div>
+            {isUniversityOpen && (
+              <ul className="mt-2 ml-4 space-y-2">
+                <Link to="/get-all-universities">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
+                    All Universities
+                  </li>
+                </Link>
+
+                <Link to="/create-university">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
+                    Create University
                   </li>
                 </Link>
               </ul>

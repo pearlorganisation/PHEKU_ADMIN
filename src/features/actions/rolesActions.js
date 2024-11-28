@@ -34,25 +34,26 @@ export const createRoles = createAsyncThunk(
 /*----------------------------------------------to get the roles------------------------------------------------------------------*/
 
 export const getRoles = createAsyncThunk(
-    "roles/getRoles",async(_,{ rejectWithValue })=>{
-        try {
-            const config = {
-                headers:{
-                    "Content-Type": "application/json"
-                }
-            }
-            const {data} = await axiosInstance.get(`/api/v1/roles`,{ config })
-            console.log("The data of roles",data.data);
-            return data.data;
-        } catch (error) {
-              if (error.response && error.response.data.message) {
-                  return rejectWithValue(error.response.data.message);
-              } else {
-                  return rejectWithValue(error.message);
-              }
-        }
+  "roles/getRoles",
+  async (_, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await axiosInstance.get(`/api/v1/roles`, { config });
+      console.log("The data of roles", data.data);
+      return data.data;
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
     }
-)
+  }
+);
 
 export const getRoleById = createAsyncThunk(
   "roleById/getById",
@@ -109,21 +110,22 @@ export const updateById = createAsyncThunk(
 /**--------------------------Deleting the role--------------------------------------------*/
 
 export const deleteRole = createAsyncThunk(
-    "role/delete",async(id,{rejectWithValue})=>{
-        try {
-            const config = {
-                headers:{
-                    "Content-Type":"application/json"
-                }
-            }
-        const res = await axiosInstance.delete(`/api/v1/roles/${id}`, config)
-        return res;
-        } catch (error) {
-                 if (error.response && error.response.data.message) {
-                     return rejectWithValue(error.response.data.message);
-                 } else {
-                     return rejectWithValue(error.message);
-                 }
-        }
+  "role/delete",
+  async (id, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const res = await axiosInstance.delete(`/api/v1/roles/${id}`, config);
+      return res;
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
     }
-)
+  }
+);

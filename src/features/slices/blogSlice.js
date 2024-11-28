@@ -2,10 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   createBlogCategory,
   createBlogs,
+  deleteBlog,
+  deleteBlogCategory,
   getBlogCategories,
   getBlogs,
   getSingleBlog,
+  getSingleBlogCategory,
   updateBlog,
+  updateBlogCategory,
 } from "../actions/blogActions";
 import { toast } from "sonner";
 
@@ -68,12 +72,43 @@ const blogSlice = createSlice({
         state.isSuccess = true;
         state.isUpdated = true;
         state.singleBlog = action.payload;
+        toast.success("Blog Updated Successfully", {
+          position: "top-center",
+        });
       })
       .addCase(updateBlog.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
+        toast.error(action.error, {
+          position: "top-center",
+        });
+      })
+
+      // delete blog
+
+      .addCase(deleteBlog.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteBlog.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.isDeleted = true;
+        state.singleBlog = action.payload;
+        toast.success("Blog Deleted Successfully", {
+          position: "top-center",
+        });
+      })
+      .addCase(deleteBlog.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        toast.error(action.error, {
+          position: "top-center",
+        });
       })
 
       //create BLOgs
@@ -96,6 +131,9 @@ const blogSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
+        toast.error(action.error, {
+          position: "top-center",
+        });
       })
 
       // create blog Category
@@ -135,6 +173,77 @@ const blogSlice = createSlice({
         state.blogsCatPaginate = action.payload.metadata;
       })
       .addCase(getBlogCategories.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        toast.error(action.error, {
+          position: "top-center",
+        });
+      })
+
+      // update blog category
+
+      .addCase(updateBlogCategory.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateBlogCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.isUpdated = true;
+        state.blogCategory = action.payload;
+        toast.success("Blog Category Updated Successfully", {
+          position: "top-center",
+        });
+      })
+      .addCase(updateBlogCategory.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        toast.error(action.error, {
+          position: "top-center",
+        });
+      })
+
+      // delete single blog category
+
+      .addCase(deleteBlogCategory.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteBlogCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.isDeleted = true;
+        state.blogCategory = action.payload;
+        toast.success("Blog Category Deleted Successfully", {
+          position: "top-center",
+        });
+      })
+      .addCase(deleteBlogCategory.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        toast.error(action.error, {
+          position: "top-center",
+        });
+      })
+
+      // get single blog category
+
+      .addCase(getSingleBlogCategory.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getSingleBlogCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.blogCategory = action.payload.data;
+      })
+      .addCase(getSingleBlogCategory.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
