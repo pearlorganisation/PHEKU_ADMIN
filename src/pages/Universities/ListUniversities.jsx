@@ -18,6 +18,7 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import LanguageIcon from '@mui/icons-material/Language';
+import parse from "html-react-parser";
 
 const ListUniversities = () => {
   
@@ -29,12 +30,16 @@ const ListUniversities = () => {
   },[])
 
   const renderHighlights = (highlights) => {
-    // Remove newline characters and HTML tags
-    const highlightList = highlights
-      .replace(/\\n/g, '')
-      .replace(/<\/?ul>|<\/?li>|<\/?strong>/g, '')
-      .split('</li><li>');
+  
+    // Remove all HTML tags and newline characters
+    const cleanHighlights = highlights
+      .replace(/<\/?[^>]+(>|$)/g, '') // Removes all HTML tags
+      .replace(/\\n/g, ''); // Removes escaped newlines
 
+    // Split highlights into a list by a delimiter (e.g., commas, newlines, etc.)
+    const highlightList = cleanHighlights.split('.').filter((item) => item.trim() !== '');
+
+    // Render the list
     return highlightList.map((highlight, index) => (
       <Typography key={index} variant="body2" color="textSecondary" component="li">
         • {highlight.trim()}
@@ -44,9 +49,9 @@ const ListUniversities = () => {
 
   const renderFacilities = (facilities) => {
     return facilities
-      .replace(/<\/?ul>|<\/?li>/g, '')
-      .split('\n')
-      .filter(facility => facility.trim())
+      .replace(/<\/?[^>]+(>|$)/g, '') // Remove all HTML tags
+      .split(/\\n/g) // Split by escaped newlines
+      .filter((facility) => facility.trim()) // Remove empty entries
       .map((facility, index) => (
         <Typography key={index} variant="body2" color="textSecondary" component="li">
           • {facility.trim()}

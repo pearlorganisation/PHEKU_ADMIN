@@ -2,20 +2,23 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useForm , Controller} from 'react-hook-form'
 import slugify from 'slugify'
 import { Editor } from '@tinymce/tinymce-react'
+import { useDispatch } from 'react-redux'
+import { createUniversity } from '../../features/actions/universityAction'
 
 const CreateUniversity = () => {
   const overViewRef = useRef();
   const highLightRef = useRef();
   const facilitiesRef = useRef();
 
-    const {register , handleSubmit , setValue, watch, control, formState:{errors}} = useForm()
+  const dispatch = useDispatch();
+  const {register , handleSubmit , setValue, watch, control, formState:{errors}} = useForm()
   /* states for previewng the coverPhoto images in frontend */
- const [image, setImage] = useState(null) 
- const [preview, setImagePreview] = useState(null);
+  const [image, setImage] = useState(null) 
+  const [preview, setImagePreview] = useState(null);
 
- /** states for managing logo Image */
- const [logoImage, setLogoImage] = useState(null);
- const [previewLogo, setPreviewLogo] = useState(null);
+  /** states for managing logo Image */
+  const [logoImage, setLogoImage] = useState(null);
+  const [previewLogo, setPreviewLogo] = useState(null);
 
     /** for selecting the coverPhoto */
     const handleImageChange=(e)=>{
@@ -53,14 +56,26 @@ const CreateUniversity = () => {
             setValue("slug",slug)
         }
     },[slugName,setValue])
+
+    /** handle to submit the form */
+    const SubmitForm = async(data)=>{
+        console.log("---------form data", data);
+        const formData = new FormData();
+        formData.append("coverPhoto",image);
+        formData.append("logo",logoImage);
+
+        dispatch(createUniversity(data)).then((res)=>{
+         console.log("page 10101", res);
+        })
+    }
     return (
       <div className="mt-20 ml-72">
         <div className='container mx-auto p-10'>
-          <form className='bg-white rounded-md shadow-md p-8'>
+          <form className='bg-white rounded-md shadow-md p-8' onSubmit={handleSubmit(SubmitForm)}>
           {/** cover photo */}
                     <div className="mb-6">
                         <label
-                            htmlFor="thumbImage"
+                            htmlFor="coverPhtoto"
                             className="block text-sm font-medium text-gray-700 mb-2"
                         >
                             Upload Cover Image
@@ -473,6 +488,31 @@ const CreateUniversity = () => {
                             </p>
                         )}
                     </div>
+            {/** University Location Embedded Link */}
+
+                    <div className="mb-6">
+                        <label
+                            htmlFor="location"
+                            className="block mb-2 text-sm font-medium text-gray-700"
+                        >
+                            University Location
+                        </label>
+                        <input
+                            type="text"
+                            id="location"
+                            {...register("location", { required: "Link of the Location is required" })}
+                            className={`shadow-sm bg-gray-50 border ${errors.location ? "border-red-500" : "border-gray-300"
+                                } 
+                            text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
+                            block w-full p-2.5`}
+                            placeholder="Enter Embedded location from the google maps."
+                        />
+                        {errors.location && (
+                            <p className="text-red-500 text-sm mt-1">
+                                {errors.location.message}
+                            </p>
+                        )}
+                    </div>
             {/** overview section */}
                     <div className="mb-6">
                         <label
@@ -600,7 +640,9 @@ const CreateUniversity = () => {
                             </p>
                         )}
                     </div>
-
+                    <button className='w-full rounded-lg bg-indigo-500 text-white h-12 transition-all duration-300 ease-in-out hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 shadow-md hover:shadow-lg active:scale-[0.98]'>
+                        Submit
+                    </button>
           </form>
         </div>
       </div>
