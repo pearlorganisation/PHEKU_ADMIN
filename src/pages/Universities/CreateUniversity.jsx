@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useForm , Controller} from 'react-hook-form'
+import { useForm , Controller, useFieldArray} from 'react-hook-form'
 import slugify from 'slugify'
 import { Editor } from '@tinymce/tinymce-react'
 import { useDispatch } from 'react-redux'
@@ -12,6 +12,7 @@ const CreateUniversity = () => {
 
   const dispatch = useDispatch();
   const {register , handleSubmit , setValue, watch, control, formState:{errors}} = useForm()
+  const { fields, append, remove } = useFieldArray({ control, name: 'faculties' });
   /* states for previewng the coverPhoto images in frontend */
   const [image, setImage] = useState(null) 
   const [preview, setImagePreview] = useState(null);
@@ -640,6 +641,55 @@ const CreateUniversity = () => {
                             </p>
                         )}
                     </div>
+            {/** Faculties */}
+                    <div className="mb-6">
+                        <h2>Faculties</h2>
+                        {fields.map((faculty, index) => (
+                            <div key={faculty.id} className="faculty-group">
+                                <h3>Faculty {index + 1}</h3>
+                                <Controller
+                                    name={`faculties.${index}.name`}
+                                    control={control}
+                                    render={({ field }) => (
+                                        <input type="text" {...field} placeholder="Name" required />
+                                    )}
+                                />
+                                {errors.faculties && errors.faculties[index] && errors.faculties[index].name && <span>Name is required</span>}
+
+                                <Controller
+                                    name={`faculties.${index}.position`}
+                                    control={control}
+                                    render={({ field }) => (
+                                        <input type="text" {...field} placeholder="Position" required />
+                                    )}
+                                />
+                                {errors.faculties && errors.faculties[index] && errors.faculties[index].position && <span>Position is required</span>}
+
+                                <Controller
+                                    name={`faculties.${index}.department`}
+                                    control={control}
+                                    render={({ field }) => (
+                                        <input type="text" {...field} placeholder="Department" required />
+                                    )}
+                                />
+                                {errors.faculties && errors.faculties[index] && errors.faculties[index].department && <span>Department is required</span>}
+
+                                <Controller
+                                    name={`faculties.${index}.contactEmail`}
+                                    control={control}
+                                    render={({ field }) => (
+                                        <input type="email" {...field} placeholder="Contact Email" required />
+                                    )}
+                                />
+                                {errors.faculties && errors.faculties[index] && errors.faculties[index].contactEmail && <span>Valid email is required</span>}
+
+                                <button type="button" onClick={() => remove(index)}>Remove Faculty</button>
+                            </div>
+                        ))}
+
+                        <button type="button" onClick={() => append({ name: '', position: '', department: '', contactEmail: '' })}>Add Faculty</button>
+                    </div>
+            {/** submit button */}
                     <button className='w-full rounded-lg bg-indigo-500 text-white h-12 transition-all duration-300 ease-in-out hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 shadow-md hover:shadow-lg active:scale-[0.98]'>
                         Submit
                     </button>
