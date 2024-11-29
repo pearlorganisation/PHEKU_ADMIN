@@ -643,54 +643,68 @@ const CreateUniversity = () => {
                     </div>
             {/** Faculties */}
                     <div className="mb-6">
-                        <h2>Faculties</h2>
+                    
+                           <h2 className="text-xl font-bold mb-4">Faculties</h2>
                         {fields.map((faculty, index) => (
-                            <div key={faculty.id} className="faculty-group">
-                                <h3>Faculty {index + 1}</h3>
-                                <Controller
-                                    name={`faculties.${index}.name`}
-                                    control={control}
-                                    render={({ field }) => (
-                                        <input type="text" {...field} placeholder="Name" required />
-                                    )}
-                                />
-                                {errors.faculties && errors.faculties[index] && errors.faculties[index].name && <span>Name is required</span>}
+                            <div key={faculty.id} className="mb-4 bg-gray-100 p-4 rounded-lg shadow-md"> {/* Added styling */}
+                                <h3 className="text-lg font-bold mb-2">Faculty {index + 1}</h3>
+                                <div className="mb-2">
+                                    <label htmlFor={`faculty-name-${index}`} className="block text-gray-700 font-bold mb-1">Name</label>
+                                    <Controller
+                                        name={`faculties.${index}.name`}
+                                        control={control}
+                                        render={({ field }) => (
+                                            <input type="text" {...field} id={`faculty-name-${index}`} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+                                        )}
+                                    />
+                                    {errors.faculties && errors.faculties[index] && errors.faculties[index].name && <span className="text-red-500 text-xs italic">Name is required</span>}
+                                </div>
+                                {/* Repeat similar structure for other fields: position, department, contactEmail */}
+                                <div className="mb-2">
+                                    <label htmlFor={`faculty-position-${index}`} className="block text-gray-700 font-bold mb-1">Position</label>
+                                    <Controller
+                                        name={`faculties.${index}.position`}
+                                        control={control}
+                                        render={({ field }) => (
+                                            <input type="text" {...field} id={`faculty-position-${index}`} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+                                        )}
+                                    />
+                                    {errors.faculties && errors.faculties[index] && errors.faculties[index].position && <span className="text-red-500 text-xs italic">Position is required</span>}
+                                </div>
 
-                                <Controller
-                                    name={`faculties.${index}.position`}
-                                    control={control}
-                                    render={({ field }) => (
-                                        <input type="text" {...field} placeholder="Position" required />
-                                    )}
-                                />
-                                {errors.faculties && errors.faculties[index] && errors.faculties[index].position && <span>Position is required</span>}
+                                <div className="mb-2">
+                                    <label htmlFor={`faculty-department-${index}`} className="block text-gray-700 font-bold mb-1">Department</label>
+                                    <Controller
+                                        name={`faculties.${index}.department`}
+                                        control={control}
+                                        render={({ field }) => (
+                                            <input type="text" {...field} id={`faculty-department-${index}`} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+                                        )}
+                                    />
+                                    {errors.faculties && errors.faculties[index] && errors.faculties[index].department && <span className="text-red-500 text-xs italic">Department is required</span>}
+                                </div>
 
-                                <Controller
-                                    name={`faculties.${index}.department`}
-                                    control={control}
-                                    render={({ field }) => (
-                                        <input type="text" {...field} placeholder="Department" required />
-                                    )}
-                                />
-                                {errors.faculties && errors.faculties[index] && errors.faculties[index].department && <span>Department is required</span>}
+                                <div className="mb-2">
+                                    <label htmlFor={`faculty-email-${index}`} className="block text-gray-700 font-bold mb-1">Contact Email</label>
+                                    <Controller
+                                        name={`faculties.${index}.contactEmail`}
+                                        control={control}
+                                        render={({ field }) => (
+                                            <input type="email" {...field} id={`faculty-email-${index}`} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+                                        )}
+                                    />
+                                    {errors.faculties && errors.faculties[index] && errors.faculties[index].contactEmail && <span className="text-red-500 text-xs italic">Valid email is required</span>}
+                                </div>
 
-                                <Controller
-                                    name={`faculties.${index}.contactEmail`}
-                                    control={control}
-                                    render={({ field }) => (
-                                        <input type="email" {...field} placeholder="Contact Email" required />
-                                    )}
-                                />
-                                {errors.faculties && errors.faculties[index] && errors.faculties[index].contactEmail && <span>Valid email is required</span>}
-
-                                <button type="button" onClick={() => remove(index)}>Remove Faculty</button>
+                                <button type="button" onClick={() => remove(index)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remove Faculty</button>
                             </div>
                         ))}
 
-                        <button type="button" onClick={() => append({ name: '', position: '', department: '', contactEmail: '' })}>Add Faculty</button>
-                    </div>
+                        <button type="button" onClick={() => append({ name: '', position: '', department: '', contactEmail: '' })} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Faculty</button>
+                    </div> 
+
             {/** submit button */}
-                    <button className='w-full rounded-lg bg-indigo-500 text-white h-12 transition-all duration-300 ease-in-out hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 shadow-md hover:shadow-lg active:scale-[0.98]'>
+                     <button className='w-full rounded-lg bg-indigo-500 text-white h-12 transition-all duration-300 ease-in-out hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 shadow-md hover:shadow-lg active:scale-[0.98]'>
                         Submit
                     </button>
           </form>
