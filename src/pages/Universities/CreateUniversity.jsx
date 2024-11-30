@@ -643,8 +643,7 @@ const CreateUniversity = () => {
                     </div>
             {/** Faculties */}
                     <div className="mb-6">
-                    
-                           <h2 className="text-xl font-bold mb-4">Faculties</h2>
+                        <h2 className="text-xl font-bold mb-4">Faculties</h2>
                         {fields.map((faculty, index) => (
                             <div key={faculty.id} className="mb-4 bg-gray-100 p-4 rounded-lg shadow-md"> {/* Added styling */}
                                 <h3 className="text-lg font-bold mb-2">Faculty {index + 1}</h3>
