@@ -153,7 +153,7 @@ const SubmitForm =(data)=>{
           <select
           {...register("country",{required:"Please Select a Country"})}>
             <option value="">Choose a Country</option>
-            {countryData?.map((country)=>(
+            {Array.isArray(countryData) && countryData?.map((country)=>(
               <option key={country?._id} value={country?._id}>
                 {country?.name}
               </option>
@@ -173,7 +173,7 @@ const SubmitForm =(data)=>{
           <select
             {...register("university", { required: "Please Select a University" })}>
             <option value="">Choose a University</option>
-            {universityInfo?.map((university) => (
+            {Array.isArray(universityInfo) && universityInfo?.map((university) => (
               <option key={university?._id} value={university?._id}>
                 {university?.name}
               </option>
@@ -218,7 +218,7 @@ const SubmitForm =(data)=>{
           <select
             {...register("courseLevel", { required: "Please Select a course Level" })}>
             <option value="">Choose a Course Level</option>
-            {courseLevelInfo?.map((courseLevel) => (
+            {Array.isArray(courseLevelInfo) && courseLevelInfo?.map((courseLevel) => (
               <option key={courseLevel?._id} value={courseLevel?._id}>
                 {courseLevel?.level}
               </option>
@@ -287,7 +287,7 @@ const SubmitForm =(data)=>{
           <select
             {...register("specialization", { required: "Please Select a course specialization" })}>
             <option value="">Choose a Course specialization</option>
-            {courseSpecialization?.map((courseSpecial) => (
+            {Array.isArray(courseSpecialization) && courseSpecialization?.map((courseSpecial) => (
               <option key={courseSpecial?._id} value={courseSpecial?._id}>
                 {courseSpecial?.name}
               </option>

@@ -27,7 +27,7 @@ const ListAllCourses = () => {
                 <h1 className="text-3xl font-bold mb-8 text-gray-800">Available Courses</h1>
 
                 <div className="grid grid-cols-1 gap-6">
-                    {coursesData?.map((course) => (
+                    {Array.isArray(coursesData) && coursesData?.map((course) => (
                         <Card
                             key={course?._id}
                             className="shadow-lg hover:shadow-2xl transition-shadow duration-300 rounded-lg overflow-hidden"
