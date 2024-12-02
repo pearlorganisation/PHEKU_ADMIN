@@ -21,6 +21,7 @@ import CourseLevelList from "./pages/Course/CourseLevelList";
 import AddCourse from "./pages/Course/AddCourse/AddCourse";
 import ListUniversities from "./pages/Universities/ListUniversities";
 import CreateUniversity from "./pages/Universities/CreateUniversity";
+import ListAllCourses from "./pages/Course/ListAllCourses";
 
 const AppRoutes =()=>{
   const { isAdminLoggedIn } = useSelector((state)=>state.auth);
@@ -106,6 +107,10 @@ const AppRoutes =()=>{
         {
           path:"create-university",
           element:<CreateUniversity />
+        },
+        {
+          path:"list-all-courses",
+          element:<ListAllCourses />
         }
       ]:[],
     },

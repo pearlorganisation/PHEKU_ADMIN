@@ -103,6 +103,13 @@ const Sidebar = () => {
                     Add Course
                   </li>
                 </Link>
+
+                {/**----------------List All Courses--------------------*/}
+                <Link to="list-all-courses">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
+                    All Courses
+                  </li>
+                </Link>
               </ul>
             )}
           </div>

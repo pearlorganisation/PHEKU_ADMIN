@@ -219,3 +219,25 @@ export const getSingleSpecialization = createAsyncThunk(
             }
         }
     )
+
+    /**-----------------Action for getting all the courses in the database--------------------------------------------------- */
+
+    export const getAllCourses = createAsyncThunk(
+        "get/all-courses",async(_,{rejectWithValue})=>{
+            try {
+                const config ={
+                    headers:{
+                        "Content-Type":"application/json"
+                    }
+                }
+                const { data }= await axiosInstance.get(`/api/v1/courses`,config)
+                return data.data;
+            } catch (error) {
+                if (error.response && error.response.data.message) {
+                    return rejectWithValue(error.response.data.message);
+                } else {
+                    return rejectWithValue(error.message);
+                }
+            }
+        }
+    )

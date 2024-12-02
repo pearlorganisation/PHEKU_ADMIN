@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { addCourse, createCourseLevel, createSpecialization, deleteCourseLevel, deleteSpecialization, getAllCourse, getAllSpecialization, getSingleSpecialization, updateSpecialization } from "../actions/courseAction"
+import { addCourse, createCourseLevel, createSpecialization, deleteCourseLevel, deleteSpecialization, getAllCourse, getAllCourses, getAllSpecialization, getSingleSpecialization, updateSpecialization } from "../actions/courseAction"
 import { toast } from "sonner"
 
 const initialState ={
@@ -18,7 +18,8 @@ const initialState ={
         isSuccess: false,
         isError: false,
         isLoading: false,
-    }
+    },
+    coursesData:{} // for holding the all the courses data
 }
 
 
@@ -134,8 +135,10 @@ const courseSlice = createSlice({
         state.isSuccess = false
         toast.error(action.payload);
     })
+    /**----------Note------------*/
+    //  this is for getting the course level not the courses keep in mind
     .addCase(getAllCourse.fulfilled,(state,action)=>{
-        state.isLoading = false;
+        state.isLoading = false; 
         state.isError = false;
         state.isSuccess = true;
         state.courseLevelInfo = action.payload
@@ -176,6 +179,23 @@ const courseSlice = createSlice({
         state.createCourse.isError = true;
         state.createCourse.isSuccess= false;
         toast.error(action.payload,{position:"top-right"})
+    })
+    /**----------This is for getting all the courses------------------*/
+    .addCase(getAllCourses.pending,(state)=>{
+        state.isLoading = true
+    })
+    .addCase(getAllCourses.rejected,(state,action)=>{
+        state.isLoading = false
+        state.isSuccess = false
+        state.isError= true
+        toast.error(action.payload,{position:"top-right"})
+    })
+    .addCase(getAllCourses.fulfilled,(state,action)=>{
+        state.isSuccess = true
+        state.isError = false
+        state.isLoading = false
+        state.coursesData = action.payload
+         toast.success("All Courses are retrieved",{position:"top-right"})
     })
   }
 })

@@ -1,13 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllUniversities } from '../../../features/actions/universityAction';
 import { addCourse, getAllCourse, getAllSpecialization } from '../../../features/actions/courseAction';
 import { getAllCountries } from '../../../features/actions/countryAction';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import slugify from 'slugify';
+import JoditEditor from 'jodit-react';
 const AddCourse = () => {
+/** description ref */
+   const editorRef = useRef();
+
    const dispatch = useDispatch();
-   const { register, handleSubmit, setValue , watch, formState:{ errors }} = useForm();
+   const { register, handleSubmit, setValue , control ,watch, formState:{ errors }} = useForm();
    // getting data from the store 
    const { universityInfo } = useSelector((state) => state.universities)
    const { countryData } = useSelector((state)=>state.countries)
@@ -35,6 +39,62 @@ const SubmitForm =(data)=>{
         dispatch(getAllCourse())
         dispatch(getAllCountries())
     },[])
+
+/** Config for the jodit editor */
+  const config = {
+    readonly: false,
+    height: 400,
+    toolbar: true,
+    buttons: [
+      "source",
+      "|",
+      "bold",
+      "italic",
+      "underline",
+      "strikethrough",
+      "|",
+      "superscript",
+      "subscript",
+      "|",
+      "ul",
+      "ol",
+      "|",
+      "outdent",
+      "indent",
+      "|",
+      "font",
+      "fontsize",
+      "brush",
+      "paragraph",
+      "|",
+      "align",
+      "undo",
+      "redo",
+      "|",
+      "hr",
+      "eraser",
+      "copyformat",
+      "selectall",
+      "|",
+      "print",
+      "about",
+    ],
+    uploader: {
+      insertImageAsBase64URI: true,
+      url: "your-upload-url", // If you have a file upload URL
+      format: "json",
+    },
+    placeholder: "Start typing here...",
+    showCharsCounter: true,
+    showWordsCounter: true,
+    showXPathInStatusbar: false,
+    spellcheck: true,
+    allowResizeY: true,
+    allowResizeX: false,
+    language: "en",
+    askBeforePasteHTML: true,
+    askBeforePasteFromWord: true,
+  };
   return (
     <main className="flex-1 p-8 mt-16 ml-64">
       <div>AddCourse</div>
@@ -56,7 +116,7 @@ const SubmitForm =(data)=>{
               } 
                             text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
                             block w-full p-2.5`}
-            placeholder="Enter blog slugName"
+            placeholder="Enter  Course Name"
           />
           {errors.name && (
             <p className="text-red-500 text-sm mt-1">
@@ -235,6 +295,31 @@ const SubmitForm =(data)=>{
           </select>
           {errors.specialization && <p>{errors.specialization.message}</p>}
         </div>
+        {/** Description */}
+          <div className="mb-6">
+            <label className="block mb-2 text-sm font-medium text-gray-700">
+              Blog Content
+            </label>
+            <Controller
+              control={control}
+              name="description"
+              rules={{ required: "Description is required" }}
+              render={({ field }) => (
+                <JoditEditor
+                  ref={editorRef}
+                  value={field.value}
+                  config={config}
+                  onBlur={field.onBlur}
+                  onChange={(content) => field.onChange(content)}
+                />
+              )}
+            />
+            {errors.description && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.description?.message}
+              </p>
+            )}
+          </div>
         <button type='submit'>Submit</button>
         </form>
       </div>
