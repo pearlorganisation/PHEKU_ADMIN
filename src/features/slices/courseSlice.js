@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { addCourse, createCourseLevel, createSpecialization, deleteCourseLevel, deleteSpecialization, getAllCourse, getAllCourses, getAllSpecialization, getSingleSpecialization, updateSpecialization } from "../actions/courseAction"
+import { addCourse, createCourseLevel, createSpecialization, deleteCourse, deleteCourseLevel, deleteSpecialization, getAllCourse, getAllCourses, getAllSpecialization, getSingleSpecialization, updateSpecialization } from "../actions/courseAction"
 import { toast } from "sonner"
 
 const initialState ={
@@ -19,7 +19,12 @@ const initialState ={
         isError: false,
         isLoading: false,
     },
-    coursesData:{} // for holding the all the courses data
+    coursesData:{}, // for holding the all the courses data
+    courseDelete:{
+        isLoading:false,
+        isSuccess:false,
+        isError:false
+    }
 }
 
 
@@ -196,6 +201,24 @@ const courseSlice = createSlice({
         state.isLoading = false
         state.coursesData = action.payload
          toast.success("All Courses are retrieved",{position:"top-right"})
+    })/** to delete a single course */
+    .addCase(deleteCourse.pending,(state)=>{
+        state.courseDelete = state.courseDelete ?? {}
+        state.courseDelete.isLoading = true
+    })
+    .addCase(deleteCourse.rejected,(state,action)=>{
+        state.courseDelete = state.courseDelete ?? {}
+        state.courseDelete.isLoading = false
+        state.courseDelete.isSuccess = false
+        state.courseDelete.isError = true
+        toast.error(action.payload,{position:"top-right"})
+    })
+    .addCase(deleteCourse.fulfilled,(state)=>{
+        state.courseDelete = state.courseDelete ?? {}
+        state.courseDelete.isLoading = false
+          state.courseDelete.isSuccess = true
+          state.courseDelete.isError = false
+          toast.success("Course Deleted Successfully")
     })
   }
 })

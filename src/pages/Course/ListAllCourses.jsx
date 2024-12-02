@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllCourses } from '../../features/actions/courseAction'
+import { deleteCourse, getAllCourses } from '../../features/actions/courseAction'
 import {
     Card,
     CardContent,
@@ -13,9 +13,28 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import parse from 'html-react-parser';
 
+import { RiDeleteBin6Line } from "react-icons/ri";
+import ConfirmDeleteModal from '../../components/ConfirmModal/ConfirmDeleteModal';
+
 const ListAllCourses = () => {
     const dispatch = useDispatch();
     const { coursesData } = useSelector((state) => state.course);
+ /**--------------------------Deleting course---------------------------*/
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [selectedCourseId, setSelectedCourseId] = useState(null);
+
+    /**--------------Handle to select a course id and open a modal-------------- */
+    const handleSelectCourse = (id)=>{
+        setSelectedCourseId(id)
+        setShowDeleteModal(true)
+    }
+
+    /**-----------------Confirm handle to delete the course----------------------- */
+    const confirmDelete=()=>{
+        dispatch(deleteCourse(selectedCourseId))
+        dispatch(getAllCourses())
+        setShowDeleteModal(false);
+    }
 
     useEffect(() => {
         dispatch(getAllCourses());
@@ -32,8 +51,14 @@ const ListAllCourses = () => {
                             key={course?._id}
                             className="shadow-lg hover:shadow-2xl transition-shadow duration-300 rounded-lg overflow-hidden"
                         >
+                            <div className='flex justify-end p-3'>
+                                <button onClick={() => handleSelectCourse(course?._id)}>
+                                    <RiDeleteBin6Line size={20} color="red" /></button>
+                            </div>
+                           
                             <div className="flex">
                                 {/* University Logo Placeholder */}
+                              
                                 <CardMedia
                                     component="img"
                                     alt={course?.university?.name}
@@ -118,7 +143,14 @@ const ListAllCourses = () => {
                         No courses available at the moment.
                     </div>
                 )}
+                {showDeleteModal && (
+                    <ConfirmDeleteModal
+                        confirmDelete={confirmDelete}
+                        setShowDeleteModal={setShowDeleteModal}
+                    />
+                )}
             </div>
+
         </main>
     );
 };
