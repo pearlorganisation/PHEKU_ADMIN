@@ -200,15 +200,16 @@ export const getSingleSpecialization = createAsyncThunk(
 
     /**---------------------------------------------Action for Adding a course----------------------------------------*/
     export const addCourse = createAsyncThunk(
-        "course/createCourse",async({data},{rejectWithValue})=>{
+        "course/createCourse",async(data,{rejectWithValue})=>{
             try {
+                console.log("--------data of course", data)
                    const config = {
                        headers: {
                            "Content-Type": "application/json"
                        }
                    }
-                const { response } = await axiosInstance.post(`/api/v1/courses`,{data},{config})
-                return response.data;   
+                const { response } = await axiosInstance.post(`/api/v1/courses`,data,{config})
+                return response;   
             } catch (error) {
                 if (error.response && error.response.data.message) {
                     return rejectWithValue(error.response.data.message);

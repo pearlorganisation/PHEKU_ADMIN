@@ -5,10 +5,12 @@ import rolesReducer  from "./slices/roleSlice";
 import courseReducer from "./slices/courseSlice";
 import userReducer from "./slices/userSlice/userSlice"
 import universityReducer from "./slices/universitySlice"
+import countryReducer from "./slices/countrySlice"
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
 import persistStore from "redux-persist/es/persistStore";
+
 
 const persistConfig = {
   key: "pheku_admin",
@@ -32,7 +34,8 @@ const reducer = combineReducers({
   role: rolesReducer,
   course: courseReducer,
   user: userReducer,
-  universities: universityReducer
+  universities: universityReducer,
+  countries: countryReducer
 });
 
 const rootReducer = (state, action) => {
