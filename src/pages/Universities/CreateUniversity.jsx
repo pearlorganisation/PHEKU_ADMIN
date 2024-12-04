@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useForm , Controller, useFieldArray} from 'react-hook-form'
 import slugify from 'slugify'
 import { Editor } from '@tinymce/tinymce-react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createUniversity } from '../../features/actions/universityAction'
+import { getAllCountries } from '../../features/actions/countryAction'
 
 const CreateUniversity = () => {
   const overViewRef = useRef();
@@ -11,6 +12,8 @@ const CreateUniversity = () => {
   const facilitiesRef = useRef();
 
   const dispatch = useDispatch();
+  const { countryData } = useSelector((state) => state.countries)
+
   const {register , handleSubmit , setValue, watch, control, formState:{errors}} = useForm()
   const { fields, append, remove } = useFieldArray({ control, name: 'faculties' });
   /* states for previewng the coverPhoto images in frontend */
@@ -69,6 +72,10 @@ const CreateUniversity = () => {
          console.log("page 10101", res);
         })
     }
+
+    useEffect(()=>{
+        dispatch(getAllCountries())
+    },[])
     return (
       <div className="mt-20 ml-72">
         <div className='container mx-auto p-10'>
@@ -441,8 +448,27 @@ const CreateUniversity = () => {
                             </p>
                         )}
                     </div>
-            {/** total course */}
+            {/** Select Country */}
                     <div className="mb-6">
+                        <label
+                            htmlFor="country"
+                            className="block mb-2 text-sm font-medium text-gray-700"
+                        >
+                            Select Country
+                        </label>
+                        <select
+                            {...register("country", { required: "Please Select a Country" })}>
+                            <option value="">Choose a Country</option>
+                            {Array.isArray(countryData) && countryData?.map((country) => (
+                                <option key={country?._id} value={country?._id}>
+                                    {country?.name}
+                                </option>
+                            ))}
+                        </select>
+                        {errors.country && <p>{errors.country.message}</p>}
+                    </div>
+            {/** total course */}
+                    {/* <div className="mb-6">
                         <label
                             htmlFor="totalCourse"
                             className="block mb-2 text-sm font-medium text-gray-700"
@@ -464,9 +490,9 @@ const CreateUniversity = () => {
                                 {errors.totalCourse.message}
                             </p>
                         )}
-                    </div>
+                    </div> */}
             {/** total rating */}
-                    <div className="mb-6">
+                    {/* <div className="mb-6">
                         <label
                             htmlFor="totalRating"
                             className="block mb-2 text-sm font-medium text-gray-700"
@@ -488,7 +514,7 @@ const CreateUniversity = () => {
                                 {errors.totalRating.message}
                             </p>
                         )}
-                    </div>
+                    </div> */}
             {/** University Location Embedded Link */}
 
                     <div className="mb-6">
