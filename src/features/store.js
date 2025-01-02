@@ -6,6 +6,7 @@ import courseReducer from "./slices/courseSlice";
 import userReducer from "./slices/userSlice/userSlice"
 import universityReducer from "./slices/universitySlice"
 import countryReducer from "./slices/countrySlice"
+import accomodationReducer from "./slices/accomodationSlice"
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
@@ -35,7 +36,8 @@ const reducer = combineReducers({
   course: courseReducer,
   user: userReducer,
   universities: universityReducer,
-  countries: countryReducer
+  countries: countryReducer,
+  accomodations: accomodationReducer
 });
 
 const rootReducer = (state, action) => {

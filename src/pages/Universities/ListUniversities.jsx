@@ -32,9 +32,9 @@ const ListUniversities = () => {
   const renderHighlights = (highlights) => {
   
     // Remove all HTML tags and newline characters
-    const cleanHighlights = highlights
+    const cleanHighlights =highlights ? highlights
       .replace(/<\/?[^>]+(>|$)/g, '') // Removes all HTML tags
-      .replace(/\\n/g, ''); // Removes escaped newlines
+      .replace(/\\n/g, ''):""; // Removes escaped newlines
 
     // Split highlights into a list by a delimiter (e.g., commas, newlines, etc.)
     const highlightList = cleanHighlights.split('.').filter((item) => item.trim() !== '');
@@ -48,7 +48,7 @@ const ListUniversities = () => {
   };
 
   const renderFacilities = (facilities) => {
-    return facilities
+    return facilities ? facilities
       .replace(/<\/?[^>]+(>|$)/g, '') // Remove all HTML tags
       .split(/\\n/g) // Split by escaped newlines
       .filter((facility) => facility.trim()) // Remove empty entries
@@ -56,7 +56,7 @@ const ListUniversities = () => {
         <Typography key={index} variant="body2" color="textSecondary" component="li">
           • {facility.trim()}
         </Typography>
-      ));
+      )):"";
   };
 
   return (

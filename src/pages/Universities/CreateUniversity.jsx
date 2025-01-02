@@ -467,54 +467,6 @@ const CreateUniversity = () => {
                         </select>
                         {errors.country && <p>{errors.country.message}</p>}
                     </div>
-            {/** total course */}
-                    {/* <div className="mb-6">
-                        <label
-                            htmlFor="totalCourse"
-                            className="block mb-2 text-sm font-medium text-gray-700"
-                        >
-                            Total Course
-                        </label>
-                        <input
-                            type="number"
-                            id="totalCourse"
-                            {...register("totalCourse", { required: "Total Courses is required" })}
-                            className={`shadow-sm bg-gray-50 border ${errors.totalCourse ? "border-red-500" : "border-gray-300"
-                                } 
-                            text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
-                            block w-full p-2.5`}
-                            placeholder="Enter Total Courses"
-                        />
-                        {errors.totalCourse && (
-                            <p className="text-red-500 text-sm mt-1">
-                                {errors.totalCourse.message}
-                            </p>
-                        )}
-                    </div> */}
-            {/** total rating */}
-                    {/* <div className="mb-6">
-                        <label
-                            htmlFor="totalRating"
-                            className="block mb-2 text-sm font-medium text-gray-700"
-                        >
-                            University Rating
-                        </label>
-                        <input
-                            type="number"
-                            id="totalRating"
-                            {...register("totalRating", { required: "Total Rating is required" })}
-                            className={`shadow-sm bg-gray-50 border ${errors.totalRating ? "border-red-500" : "border-gray-300"
-                                } 
-                            text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
-                            block w-full p-2.5`}
-                            placeholder="Enter Total Rating"
-                        />
-                        {errors.totalRating && (
-                            <p className="text-red-500 text-sm mt-1">
-                                {errors.totalRating.message}
-                            </p>
-                        )}
-                    </div> */}
             {/** University Location Embedded Link */}
 
                     <div className="mb-6">

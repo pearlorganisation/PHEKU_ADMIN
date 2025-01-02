@@ -9,6 +9,7 @@ const Sidebar = () => {
   const [isRolesOpen, setIsRolesOpen] = useState(false);
   const [isCourseOpen, setIsCourseOpen] = useState(false);
   const [isUniversityOpen, setIsUniversityOpen] = useState(false);
+  const [isAccomodationOpen, setIsAccomodationOpen] = useState(false)
 
   return (
     <div>
@@ -182,7 +183,34 @@ const Sidebar = () => {
               </ul>
             )}
           </div>
-        </nav>
+          {/** Accomodation Section */}
+          <div className="mb-4">
+            <div
+              onClick={() => setIsAccomodationOpen(!isAccomodationOpen)}
+              className="flex justify-between items-center cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md"
+            >
+              <span>Accomodation</span>
+              {isAccomodationOpen ? <FaChevronUp /> : <FaChevronDown />}
+            </div>
+            {isAccomodationOpen && (
+              <ul className="mt-2 ml-4 space-y-2">
+                <Link to="/get-all-accomodation">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
+                    All Accomodation
+                  </li>
+                </Link>
+
+                <Link to="/create-accomodation">
+                  <li className="hover:text-white cursor-pointer hover:bg-gray-700 px-4 py-2 rounded-md">
+                    Create Accomodation
+                  </li>
+                </Link>
+              </ul>
+            )}
+          </div>
+         </nav>
+
+       
       </aside>
     </div>
   );

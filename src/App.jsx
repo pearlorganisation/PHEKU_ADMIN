@@ -22,6 +22,7 @@ import AddCourse from "./pages/Course/AddCourse/AddCourse";
 import ListUniversities from "./pages/Universities/ListUniversities";
 import CreateUniversity from "./pages/Universities/CreateUniversity";
 import ListAllCourses from "./pages/Course/ListAllCourses";
+import CreateAccomodation from "./pages/Accomodation/CreateAccomodation";
 
 const AppRoutes =()=>{
   const { isAdminLoggedIn } = useSelector((state)=>state.auth);
@@ -111,6 +112,10 @@ const AppRoutes =()=>{
         {
           path:"list-all-courses",
           element:<ListAllCourses />
+        },
+        {
+          path:"create-accomodation",
+          element:<CreateAccomodation />
         }
       ]:[],
     },
